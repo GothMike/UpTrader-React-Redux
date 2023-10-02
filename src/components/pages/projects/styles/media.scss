@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+  .projects {
+    &__item {
+      padding-left: 0.3em;
+      &-buttons {
+        button {
+          margin: 0 3px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .projects {
+    margin-top: 6em;
+    &__item {
+      height: 75px;
+      padding-left: 0.3em;
+      &-name {
+      }
+      &-buttons {
+        flex-direction: column;
+        button {
+          padding: 5px;
+          margin: 5px;
+        }
+      }
+    }
+  }
+}

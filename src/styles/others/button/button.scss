@@ -1,0 +1,56 @@
+.button {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color-btn);
+    border-radius: 10rem;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken(#0cf, 15%);
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+  &__edit {
+    font-size: 0.5rem;
+    &:before {
+      background-color: darken(rgb(247, 227, 52), 15%);
+    }
+  }
+  &__delete {
+    font-size: 0.5rem;
+    &:before {
+      background-color: darken(rgb(224, 114, 114), 15%);
+    }
+  }
+}

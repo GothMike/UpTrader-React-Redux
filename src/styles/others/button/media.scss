@@ -1,0 +1,74 @@
+@media (max-width: 768px) {
+  .button {
+    &:after {
+      background-color: var(--background-color-btn);
+    }
+    &:before {
+      background-color: var(--background-color-btn);
+    }
+    &:hover {
+      color: #fff;
+      &:before {
+        width: 100%;
+      }
+    }
+    &__edit {
+      background-color: darken(rgb(247, 227, 52), 15%);
+      &:after {
+        background-color: darken(rgb(247, 227, 52), 15%);
+      }
+      &:before {
+        background-color: darken(rgb(247, 227, 52), 15%);
+      }
+    }
+    &__delete {
+      background-color: darken(rgb(224, 114, 114), 15%);
+      &:after {
+        background-color: darken(rgb(224, 114, 114), 15%);
+      }
+      &:before {
+        background-color: darken(rgb(224, 114, 114), 15%);
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .button {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-size: 0.4rem;
+    &:after {
+      background-color: var(--background-color-btn);
+    }
+    &:before {
+      background-color: var(--background-color-btn);
+    }
+    &:hover {
+      color: #fff;
+      &:before {
+        width: 100%;
+      }
+    }
+    &__edit {
+      font-size: 0.4rem;
+      background-color: darken(rgb(247, 227, 52), 15%);
+      &:after {
+        background-color: darken(rgb(247, 227, 52), 15%);
+      }
+      &:before {
+        background-color: darken(rgb(247, 227, 52), 15%);
+      }
+    }
+    &__delete {
+      font-size: 0.4rem;
+      background-color: darken(rgb(224, 114, 114), 15%);
+      &:after {
+        background-color: darken(rgb(224, 114, 114), 15%);
+      }
+      &:before {
+        background-color: darken(rgb(224, 114, 114), 15%);
+      }
+    }
+  }
+}
