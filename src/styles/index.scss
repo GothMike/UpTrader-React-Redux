@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Gochi+Hand");
+
 @import url(../components/container/container.scss);
 @import url(./variables.scss);
 
@@ -7,11 +9,12 @@
 @import url(../components/pages/projects/styles/projectList.scss);
 @import url(../components//pages/projects/styles/media.scss);
 
-@import url("https://fonts.googleapis.com/css?family=Gochi+Hand");
 @import url(./others/button/button.scss);
 @import url(./others/button/media.scss);
 
-* {
+@import url(../components/pages/projects/modals/modals.scss);
+
+body {
   font-family: "Gochi Hand", cursive;
   background: url(../assets/bg--dots.png) top left #fff;
 }

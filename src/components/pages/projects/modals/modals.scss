@@ -1,0 +1,61 @@
+.modal {
+  position: fixed;
+  height: 18rem;
+  top: 50%;
+  left: 50%;
+  width: 15rem;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  &_active {
+    opacity: 1;
+    visibility: visible;
+  }
+  &__form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-evenly;
+    background-color: var(--background-color-modal);
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    label {
+      margin-bottom: 0.5rem;
+    }
+  }
+  &__input {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  &__close {
+    position: absolute;
+    top: 1%;
+    right: 5%;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  &__title {
+    position: absolute;
+    top: -2%;
+    left: 5%;
+    font-size: 18px;
+  }
+  button {
+    &::after {
+      background-color: var(--background-color-modal-btn);
+    }
+  }
+}

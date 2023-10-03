@@ -1,6 +1,7 @@
 const initialState = {
   projects: [],
   projectLoadingStatus: "idle",
+  modalCreateActive: false,
 };
 
 const projects = (state = initialState, action) => {
@@ -30,7 +31,14 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         projects: state.projects.filter((item) => item.id !== action.payload),
+        modalCreateActive: false,
       };
+    case "TOOGLE_MODAL":
+      return {
+        ...state,
+        modalCreateActive: action.payload,
+      };
+
     default:
       return state;
   }

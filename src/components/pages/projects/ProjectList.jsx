@@ -4,9 +4,9 @@ import {
   projectsFetched,
   projectsFetching,
   projectsFetchingError,
-} from "../../../../actions/projectActions";
+} from "../../../redux/actions/projectActions";
 import axios from "axios";
-import ProjectItem from "../projectItem/ProjectItem";
+import ProjectItem from "./ProjectItem";
 
 const ProjectList = () => {
   const dispatch = useDispatch();
