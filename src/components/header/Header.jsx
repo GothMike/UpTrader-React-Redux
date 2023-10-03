@@ -1,4 +1,13 @@
+
+
+
 const Header = () => {
+
+
+
+  
+
+
   return (
     <>
       <header className="header">
@@ -18,6 +27,9 @@ const Header = () => {
           <button className="button">Создать</button>
         </div>
       </header>
+
+
+    
     </>
   );
 };

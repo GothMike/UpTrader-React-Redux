@@ -12,7 +12,6 @@ const stringMiddleware = () => (next) => (action) => {
 
 const rootReducer = combineReducers({
   projects: projects,
-  // Другие редьюсеры, если есть
 });
 
 const store = createStore(
