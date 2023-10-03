@@ -33,6 +33,7 @@ const ProjectList = () => {
   };
 
   const elements = renderData(projects);
+  console.log(projects);
   return (
     <>
       <section className="projects">

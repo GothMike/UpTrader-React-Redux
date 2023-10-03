@@ -31,7 +31,6 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         projects: state.projects.filter((item) => item.id !== action.payload),
-        modalCreateActive: false,
       };
     case "TOOGLE_MODAL":
       return {

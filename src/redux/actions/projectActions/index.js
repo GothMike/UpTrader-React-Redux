@@ -9,6 +9,17 @@ export const fetchProjects = () => async (dispatch) => {
     .catch(() => dispatch(projectsFetchingError()));
 };
 
+export const deleteProject = async (id, dispatch) => {
+  axios
+    .delete(apiUrl("Projects/" + id))
+    .then((response) => {
+      dispatch(projectDeleted(response.id));
+    })
+    .catch((e) => {
+      console.error("Ошибка при удалении объекта:", e);
+    });
+};
+
 export const createProject = (newProject, dispatch) => {
   axios
     .post(apiUrl(`Projects`), newProject)
@@ -42,6 +53,13 @@ export const projectCreated = (project) => {
   return {
     type: "PROJECT_CREATED",
     payload: project,
+  };
+};
+
+export const projectDeleted = (id) => {
+  return {
+    type: "PROJECT_DELETED",
+    payload: id,
   };
 };
 
