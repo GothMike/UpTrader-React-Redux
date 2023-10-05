@@ -11,9 +11,12 @@ const ProjectModal = () => {
   const [projectName, setProjectName] = useState("");
   const modalCreateActive = useSelector((state) => state.projects.modalCreateActive);
 
+  const modalActive = modalCreateActive ? "modal_active" : "";
+  const overlayActive = modalCreateActive ? "modal__overlay_active" : "";
+
   const handleEscKey = (event) => {
     if (event.key === "Escape") {
-      dispatch(toogleModal(!modalCreateActive));
+      dispatch(toogleModal(modalCreateActive));
     }
   };
 
@@ -33,15 +36,13 @@ const ProjectModal = () => {
     };
 
     createProject(newProject, dispatch);
-
     fetchProjects();
-
     setProjectName("");
   };
 
   return (
     <>
-      <div className={`modal modal__create ${modalCreateActive ? "modal_active" : ""}`}>
+      <div className={`modal modal__create ${modalActive}`}>
         <form onSubmit={onCreate} className={`modal__form `}>
           <h2 className="modal__title">Создание проекта</h2>
           <div onClick={() => dispatch(toogleModal(modalCreateActive))} className="modal__close">
@@ -65,6 +66,10 @@ const ProjectModal = () => {
           </button>
         </form>
       </div>
+      <div
+        onClick={() => dispatch(toogleModal(modalCreateActive))}
+        className={`modal__overlay ${overlayActive}`}
+      ></div>
     </>
   );
 };

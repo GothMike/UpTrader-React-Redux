@@ -9,8 +9,8 @@ const ProjectPage = () => {
       <Container>
         <Header />
         <ProjectList />
-        <ProjectModal />
       </Container>
+      <ProjectModal />
     </>
   );
 };
