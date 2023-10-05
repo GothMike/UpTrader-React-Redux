@@ -27,6 +27,11 @@ const projects = (state = initialState, action) => {
         ...state,
         projects: [...state.projects, action.payload],
       };
+    case "PROJECT_CREATE_SUCCESS":
+      return {
+        ...state,
+        modalCreateActive: false,
+      };
     case "PROJECT_DELETED":
       return {
         ...state,

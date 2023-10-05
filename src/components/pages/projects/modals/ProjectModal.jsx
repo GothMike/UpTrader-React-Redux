@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createProject,
-  fetchProjects,
-  toogleModal,
-} from "../../../../redux/actions/projectActions/index";
+import { toogleModal } from "../../../../redux/actions/projectActions";
+
+import { projectCreated, projectCreateSuccess } from "../../../../redux/actions/projectActions";
 
 const ProjectModal = () => {
   const dispatch = useDispatch();
@@ -16,7 +14,7 @@ const ProjectModal = () => {
 
   const handleEscKey = (event) => {
     if (event.key === "Escape") {
-      dispatch(toogleModal(modalCreateActive));
+      dispatch(toogleModal(!modalCreateActive));
     }
   };
 
@@ -35,15 +33,15 @@ const ProjectModal = () => {
       name: projectName,
     };
 
-    createProject(newProject, dispatch);
-    fetchProjects();
+    dispatch(projectCreated(newProject));
     setProjectName("");
   };
 
+  console.log(projectName);
   return (
     <>
       <div className={`modal modal__create ${modalActive}`}>
-        <form onSubmit={onCreate} className={`modal__form `}>
+        <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
           <h2 className="modal__title">Создание проекта</h2>
           <div onClick={() => dispatch(toogleModal(modalCreateActive))} className="modal__close">
             &times;

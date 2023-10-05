@@ -1,14 +1,9 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import projects from "../reducers/projects";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../sagas/rootSaga"; // Импортируйте корневую сагу
 
-const stringMiddleware = () => (next) => (action) => {
-  if (typeof action === "string") {
-    return next({
-      type: action,
-    });
-  }
-  return next(action);
-};
+const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   projects: projects,
@@ -17,9 +12,11 @@ const rootReducer = combineReducers({
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(stringMiddleware),
+    applyMiddleware(sagaMiddleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
