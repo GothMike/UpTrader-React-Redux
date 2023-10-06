@@ -1,10 +1,11 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call, delay } from "redux-saga/effects";
 import axios from "axios";
 
 import {
   projectsFetched,
   projectsFetchingError,
   projectCreateSuccess,
+  disabledModalCreateSuccess,
   apiUrl,
 } from "../actions/projectActions";
 
@@ -29,6 +30,8 @@ export function* createProjectSaga(action) {
   try {
     yield call(() => axios.post(apiUrl("Projects"), action.payload));
     yield put(projectCreateSuccess());
+    yield delay(2000);
+    yield put(disabledModalCreateSuccess());
   } catch (error) {
     console.error("Произошла ошибка при создании проекта:", error);
   }

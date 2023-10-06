@@ -64,7 +64,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.3); /* Полупрозрачный фон */
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
     visibility: hidden;
     opacity: 0;
@@ -72,6 +72,34 @@
     &_active {
       opacity: 1;
       visibility: visible;
+    }
+  }
+
+  &__success {
+    position: fixed;
+    background-color: rgba(32, 207, 41, 0.6);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    width: 25%;
+    height: 10%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 65px;
+    z-index: 2;
+    transition: all 1s;
+    animation: fadeIn 3s forwards;
+  }
+}
+
+@media (max-width: 1024px) {
+  .modal {
+    &__success {
+      width: 50%;
+      font-size: 14px;
+      line-height: 45px;
     }
   }
 }

@@ -2,19 +2,23 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toogleModal } from "../../../../redux/actions/projectActions";
 
-import { projectCreated, projectCreateSuccess } from "../../../../redux/actions/projectActions";
+import { projectCreated } from "../../../../redux/actions/projectActions";
 
 const ProjectModal = () => {
   const dispatch = useDispatch();
   const [projectName, setProjectName] = useState("");
   const modalCreateActive = useSelector((state) => state.projects.modalCreateActive);
+  const modalCreateSuccess = useSelector((state) => state.projects.modalCreateSuccess);
+  const SuccessModal = modalCreateSuccess ? (
+    <div className="modal__success">Успешно создано!</div>
+  ) : null;
 
   const modalActive = modalCreateActive ? "modal_active" : "";
   const overlayActive = modalCreateActive ? "modal__overlay_active" : "";
 
   const handleEscKey = (event) => {
-    if (event.key === "Escape") {
-      dispatch(toogleModal(!modalCreateActive));
+    if (event.key === "Escape" && modalCreateActive) {
+      dispatch(toogleModal(modalCreateActive));
     }
   };
 
@@ -34,12 +38,14 @@ const ProjectModal = () => {
     };
 
     dispatch(projectCreated(newProject));
+    dispatch(toogleModal(modalCreateActive));
     setProjectName("");
   };
 
-  console.log(projectName);
+  // Я бы создал здесь портал, но не нашел упоминания, можно ли его включить в разработку
   return (
     <>
+      {SuccessModal}
       <div className={`modal modal__create ${modalActive}`}>
         <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
           <h2 className="modal__title">Создание проекта</h2>
@@ -57,6 +63,7 @@ const ProjectModal = () => {
               className="modal__input"
               id="name"
               placeholder="Введите название"
+              disabled={!modalCreateActive}
             />
           </div>
           <button type="submit" className="button">

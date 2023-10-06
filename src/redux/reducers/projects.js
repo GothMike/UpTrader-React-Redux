@@ -2,6 +2,7 @@ const initialState = {
   projects: [],
   projectLoadingStatus: "idle",
   modalCreateActive: false,
+  modalCreateSuccess: false,
 };
 
 const projects = (state = initialState, action) => {
@@ -31,6 +32,7 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         modalCreateActive: false,
+        modalCreateSuccess: true,
       };
     case "PROJECT_DELETED":
       return {
@@ -41,6 +43,11 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         modalCreateActive: action.payload,
+      };
+    case "DISABLED_CREATE_MODAL_SUCCESS":
+      return {
+        ...state,
+        modalCreateSuccess: !action.payload,
       };
 
     default:

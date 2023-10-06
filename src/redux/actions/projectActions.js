@@ -45,3 +45,10 @@ export const toogleModal = (isActive) => {
     payload: !isActive,
   };
 };
+
+export const disabledModalCreateSuccess = (isActive) => {
+  return {
+    type: "DISABLED_CREATE_MODAL_SUCCESS",
+    payload: !isActive,
+  };
+};

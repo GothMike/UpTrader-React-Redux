@@ -7,7 +7,8 @@ const Header = () => {
     <>
       <header className="header">
         <h1 className="header__title">
-          Добро пожаловать веб-приложение <span>UpTrader</span>
+          Добро пожаловать веб-приложение <br />
+          <span>UpTrader</span>
         </h1>
         <div className="header__wrapper">
           <form className="header__search">
