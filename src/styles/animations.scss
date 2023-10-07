@@ -1,0 +1,23 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    top: 1%;
+  }
+
+  100% {
+    top: -50%;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInModal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
