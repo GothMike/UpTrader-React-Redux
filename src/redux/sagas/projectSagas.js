@@ -2,10 +2,13 @@ import { put, takeLatest, call, delay } from "redux-saga/effects";
 import axios from "axios";
 
 import {
+  projectsFetching,
   projectsFetched,
   projectsFetchingError,
   projectCreateSuccess,
   disabledModalCreateSuccess,
+  projectUpdatedSuccess,
+  disabledModalUpdateSuccess,
   apiUrl,
 } from "../actions/projectActions";
 
@@ -30,6 +33,7 @@ export function* createProjectSaga(action) {
   try {
     yield call(() => axios.post(apiUrl("Projects"), action.payload));
     yield put(projectCreateSuccess());
+    yield put(projectsFetching());
     yield delay(2000);
     yield put(disabledModalCreateSuccess());
   } catch (error) {
@@ -37,8 +41,19 @@ export function* createProjectSaga(action) {
   }
 }
 
+export function* updateProjectSaga(action) {
+  try {
+    yield call(() => axios.put(apiUrl(`Projects/${action.payload.id}`), action.payload));
+    yield put(projectUpdatedSuccess());
+    yield delay(2000);
+    yield put(disabledModalUpdateSuccess());
+  } catch (error) {
+    console.error("Произошла ошибка при обновлении проекта:", error);
+  }
+}
 export function* watchProjectActions() {
   yield takeLatest("PROJECTS_FETCHING", fetchProjectsSaga);
   yield takeLatest("PROJECT_DELETED", deleteProjectSaga);
   yield takeLatest("PROJECT_CREATED", createProjectSaga);
+  yield takeLatest("PROJECT_UPDATED", updateProjectSaga);
 }

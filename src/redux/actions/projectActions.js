@@ -32,6 +32,20 @@ export const projectCreateSuccess = () => {
   };
 };
 
+export const projectUpdated = (project) => {
+  return {
+    type: "PROJECT_UPDATED",
+    payload: project,
+  };
+};
+
+export const projectUpdatedSuccess = (isActive) => {
+  return {
+    type: "PROJECT_UPDATED_SUCCESS",
+    payload: !isActive,
+  };
+};
+
 export const projectDeleted = (id) => {
   return {
     type: "PROJECT_DELETED",
@@ -49,6 +63,13 @@ export const toogleModal = (isActive) => {
 export const disabledModalCreateSuccess = (isActive) => {
   return {
     type: "DISABLED_CREATE_MODAL_SUCCESS",
+    payload: !isActive,
+  };
+};
+
+export const disabledModalUpdateSuccess = (isActive) => {
+  return {
+    type: "DISABLED_UPDATE_MODAL_SUCCESS",
     payload: !isActive,
   };
 };

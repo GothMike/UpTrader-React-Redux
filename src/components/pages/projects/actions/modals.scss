@@ -11,10 +11,15 @@
   z-index: 2;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.5s;
+  transition: all 1 ease-in-out;
+  animation: fadeInModal 1s;
   &_active {
     opacity: 1;
     visibility: visible;
+  }
+  &_fade {
+    opacity: 0 !important;
+    visibility: hidden;
   }
   &__form {
     display: flex;
@@ -23,7 +28,7 @@
     align-items: center;
     height: 100%;
     justify-content: space-evenly;
-    background-color: var(--background-color-modal);
+    background-color: darken(rgba(201, 212, 255, 0.705), 15%);
   }
 
   &__wrapper {
@@ -69,28 +74,34 @@
     visibility: hidden;
     opacity: 0;
     transition: all 0.5s;
+    animation: fadeInModal 1s;
     &_active {
       opacity: 1;
       visibility: visible;
+    }
+    &_fade {
+      opacity: 0;
+      visibility: hidden;
     }
   }
 
   &__success {
     position: fixed;
-    background-color: rgba(32, 207, 41, 0.6);
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
-    top: 25%;
+    background-color: darken(rgb(159, 219, 157), 15%);
+    top: 2%;
     left: 50%;
     transform: translate(-50%, 0%);
     border: 1px solid rgba(0, 0, 0, 0.15);
     width: 25%;
-    height: 10%;
+    height: 5%;
     text-align: center;
     font-size: 24px;
-    line-height: 65px;
+    line-height: 40px;
     z-index: 2;
     transition: all 1s;
     animation: fadeIn 3s forwards;
+    border-radius: 5px;
+    color: #fff;
   }
 }
 
@@ -99,7 +110,7 @@
     &__success {
       width: 50%;
       font-size: 14px;
-      line-height: 45px;
+      line-height: 30px;
     }
   }
 }

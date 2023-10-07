@@ -3,6 +3,7 @@ const initialState = {
   projectLoadingStatus: "idle",
   modalCreateActive: false,
   modalCreateSuccess: false,
+  modalUpdateSuccess: false,
 };
 
 const projects = (state = initialState, action) => {
@@ -34,6 +35,28 @@ const projects = (state = initialState, action) => {
         modalCreateActive: false,
         modalCreateSuccess: true,
       };
+    case "PROJECT_UPDATED": {
+      const updatedProjects = state.projects.map((project) => {
+        if (project.id === action.payload.id) {
+          return {
+            ...project,
+            ...action.payload,
+          };
+        }
+        return project;
+      });
+
+      return {
+        ...state,
+        projects: updatedProjects,
+      };
+    }
+    case "PROJECT_UPDATED_SUCCESS": {
+      return {
+        ...state,
+        modalUpdateSuccess: true,
+      };
+    }
     case "PROJECT_DELETED":
       return {
         ...state,
@@ -48,6 +71,11 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         modalCreateSuccess: !action.payload,
+      };
+    case "DISABLED_UPDATE_MODAL_SUCCESS":
+      return {
+        ...state,
+        modalUpdateSuccess: !action.payload,
       };
 
     default:

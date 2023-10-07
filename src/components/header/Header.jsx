@@ -1,8 +1,6 @@
-import { useDispatch } from "react-redux";
-import { toogleModal } from "../../redux/actions/projectActions";
+import ProjectCreate from "../pages/projects/actions/ProjectCreate";
 
 const Header = () => {
-  const dispatch = useDispatch();
   return (
     <>
       <header className="header">
@@ -20,9 +18,7 @@ const Header = () => {
               type="text"
             />
           </form>
-          <button onClick={() => dispatch(toogleModal())} className="button">
-            Создать
-          </button>
+          <ProjectCreate />
         </div>
       </header>
     </>

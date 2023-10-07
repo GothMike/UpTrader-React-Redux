@@ -1,12 +1,12 @@
-import DeleteEntity from "../../dbActions/DeleteEntity";
-
+import ProjectDelete from "./actions/ProjectDelete";
+import ProjectEdit from "./actions/ProjectEdit";
 const ProjectItem = ({ name, id }) => {
   return (
     <li key={id} href="#" className="projects__item">
       <div className="projects__item-name">{name}</div>
       <div className="projects__item-buttons">
-        <button className="button button__edit">Редактировать</button>
-        <DeleteEntity id={id} />
+        <ProjectEdit id={id} />
+        <ProjectDelete id={id} />
       </div>
     </li>
   );

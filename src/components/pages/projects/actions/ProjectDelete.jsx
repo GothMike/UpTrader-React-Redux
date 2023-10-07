@@ -1,8 +1,8 @@
-import { projectDeleted } from "../../redux/actions/projectActions";
+import { projectDeleted } from "../../../../redux/actions/projectActions";
 
 import { useDispatch } from "react-redux";
 
-const DeleteEntity = ({ id }) => {
+const ProjectDelete = ({ id }) => {
   const dispatch = useDispatch();
 
   const onDelete = (e) => {
@@ -18,4 +18,4 @@ const DeleteEntity = ({ id }) => {
   );
 };
 
-export default DeleteEntity;
+export default ProjectDelete;
