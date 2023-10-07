@@ -51,6 +51,7 @@ export function* updateProjectSaga(action) {
     console.error("Произошла ошибка при обновлении проекта:", error);
   }
 }
+
 export function* watchProjectActions() {
   yield takeLatest("PROJECTS_FETCHING", fetchProjectsSaga);
   yield takeLatest("PROJECT_DELETED", deleteProjectSaga);

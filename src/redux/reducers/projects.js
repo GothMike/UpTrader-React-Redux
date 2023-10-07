@@ -1,5 +1,6 @@
 const initialState = {
   projects: [],
+  dataEntry: "",
   projectLoadingStatus: "idle",
   modalCreateActive: false,
   modalCreateSuccess: false,
@@ -76,6 +77,11 @@ const projects = (state = initialState, action) => {
       return {
         ...state,
         modalUpdateSuccess: !action.payload,
+      };
+    case "UPDATE_SEARCH_QUERY":
+      return {
+        ...state,
+        dataEntry: action.payload,
       };
 
     default:

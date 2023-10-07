@@ -1,4 +1,5 @@
 import ProjectCreate from "../pages/projects/actions/ProjectCreate";
+import SearchPanel from "../searchPanel/SearchPanel";
 
 const Header = () => {
   return (
@@ -9,15 +10,7 @@ const Header = () => {
           <span>UpTrader</span>
         </h1>
         <div className="header__wrapper">
-          <form className="header__search">
-            <input
-              className="header__input"
-              placeholder="Поиск"
-              aria-label="Поиск"
-              name="search"
-              type="text"
-            />
-          </form>
+          <SearchPanel />
           <ProjectCreate />
         </div>
       </header>

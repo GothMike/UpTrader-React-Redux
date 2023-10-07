@@ -5,27 +5,32 @@ import ProjectItem from "./ProjectItem";
 import Spinner from "../../spinner/Spinner";
 
 const ProjectList = () => {
+  const searchQuery = useSelector((state) => state.projects.dataEntry);
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.projects.projects);
   const projectLoadingStatus = useSelector((state) => state.projects.projectLoadingStatus);
 
   console.log(projectLoadingStatus);
   useEffect(() => {
-    // Вызываем функцию загрузки данных при монтировании компонента
     dispatch(projectsFetching());
   }, []);
 
-  const renderData = (arr) => {
-    if (arr.length === 0) {
-      return <div>На текущий момент нет доступных проектов</div>;
+  const renderData = (arr, searchQuery) => {
+    // Фильтрация элементов на основе searchQuery
+    const filteredData = arr.filter((item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    if (filteredData.length === 0) {
+      return <div>Нет результатов по вашему запросу</div>;
     }
 
-    return arr.map(({ ...props }) => {
+    return filteredData.map(({ ...props }) => {
       return <ProjectItem key={props.id} {...props} />;
     });
   };
 
-  const elements = renderData(projects);
+  const elements = renderData(projects, searchQuery);
 
   switch (projectLoadingStatus) {
     case "loading":
