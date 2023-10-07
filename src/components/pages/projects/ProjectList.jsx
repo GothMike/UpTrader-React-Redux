@@ -10,13 +10,11 @@ const ProjectList = () => {
   const projects = useSelector((state) => state.projects.projects);
   const projectLoadingStatus = useSelector((state) => state.projects.projectLoadingStatus);
 
-  console.log(projectLoadingStatus);
   useEffect(() => {
     dispatch(projectsFetching());
   }, []);
 
   const renderData = (arr, searchQuery) => {
-    // Фильтрация элементов на основе searchQuery
     const filteredData = arr.filter((item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
     );

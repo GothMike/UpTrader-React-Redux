@@ -1,0 +1,25 @@
+.task {
+  margin-top: 6em;
+  &__board {
+    width: 33%;
+    height: 500px;
+    border: 5px solid pink;
+  }
+  &__title {
+    border-bottom: 1px solid rgba(40, 54, 85, 0.3);
+  }
+  &__boards {
+    display: flex;
+  }
+  &__card {
+    width: var(100% -1px);
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid;
+    display: flex;
+    cursor: grab;
+    user-select: none;
+    margin-bottom: 5px;
+    background-color: var(--background-color-modal-btn);
+  }
+}
