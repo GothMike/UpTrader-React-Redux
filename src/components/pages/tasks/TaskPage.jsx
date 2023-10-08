@@ -3,21 +3,36 @@ import Header from "../../header/Header";
 import { useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import { DragDropContext } from "react-beautiful-dnd";
+import { useDispatch, useSelector } from "react-redux";
+import { tasksFetching, saveUpdatedTask } from "../../../redux/actions/taskActions";
+import { useParams } from "react-router-dom";
 
 const TaskPage = () => {
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const { taskId } = useParams();
+
   const [queue, setQueue] = useState([]);
   const [development, setDevelopment] = useState([]);
   const [completed, setCompleted] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/1/Tasks")
-      .then((response) => response.json())
-      .then((json) => {
-        setQueue(json.filter((task) => task.isQueue));
-        setDevelopment(json.filter((task) => task.isDevelopment));
-        setCompleted(json.filter((task) => task.isDone));
-      });
+    dispatch(tasksFetching(taskId));
   }, []);
+
+  useEffect(() => {
+    renderData(tasks);
+  }, [tasks]);
+
+  const renderData = (arr) => {
+    const queueTasks = arr.filter((task) => task.isQueue);
+    const developmentTasks = arr.filter((task) => task.isDevelopment);
+    const completedTasks = arr.filter((task) => task.isDone);
+
+    setQueue(queueTasks);
+    setDevelopment(developmentTasks);
+    setCompleted(completedTasks);
+  };
 
   const handleDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -32,16 +47,23 @@ const TaskPage = () => {
     }
 
     const updatedSourceList = removeItemById(draggableId, sourceList);
-
     const task = findItemById(draggableId, sourceList);
 
-    const updatedDestinationList = [
-      ...destinationList,
-      { ...task, completed: destinationList === completed },
-    ];
+    const updatedTask = {
+      ...task,
+      isQueue: destination.droppableId === "1",
+      isDevelopment: destination.droppableId === "2",
+      isDone: destination.droppableId === "3",
+    };
+
+    const updatedDestinationList = [...destinationList, updatedTask];
 
     updateListById(source.droppableId, updatedSourceList);
     updateListById(destination.droppableId, updatedDestinationList);
+
+    console.log(taskId);
+    console.log(updatedTask.id);
+    dispatch(saveUpdatedTask(taskId, updatedTask.id, updatedTask));
   };
 
   function getListById(listId) {
@@ -52,9 +74,13 @@ const TaskPage = () => {
   }
 
   function updateListById(listId, updatedList) {
-    if (listId === "1") setQueue(updatedList);
-    else if (listId === "2") setDevelopment(updatedList);
-    else if (listId === "3") setCompleted(updatedList);
+    if (listId === "1") {
+      setQueue(updatedList);
+    } else if (listId === "2") {
+      setDevelopment(updatedList);
+    } else if (listId === "3") {
+      setCompleted(updatedList);
+    }
   }
 
   function findItemById(id, array) {

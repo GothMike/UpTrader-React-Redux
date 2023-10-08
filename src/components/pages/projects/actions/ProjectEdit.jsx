@@ -43,8 +43,6 @@ const ProjectEdit = ({ id }) => {
     setPortalVisible(!portalVisible);
   };
 
-  console.log(`PortalVisb ${portalVisible}`);
-
   const renderPortal = () => {
     if (portalVisible) {
       return (

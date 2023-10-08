@@ -1,7 +1,6 @@
 import { Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ task, index }) => {
-  console.log(task);
   return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
       {(provided, snapshot) => (

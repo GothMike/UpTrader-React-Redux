@@ -1,5 +1,6 @@
 const initialState = {
   tasks: [],
+  projectId: "",
   dataEntry: "",
   tasksLoadingStatus: "idle",
   modalCreateActive: false,
@@ -13,6 +14,7 @@ const tasks = (state = initialState, action) => {
       return {
         ...state,
         tasksLoadingStatus: "loading",
+        projectId: action.payload,
       };
     case "TASKS_FETCHED":
       return {
@@ -24,6 +26,11 @@ const tasks = (state = initialState, action) => {
       return {
         ...state,
         tasksLoadingStatus: "error",
+      };
+    case "TASKS_UPDATE":
+      return {
+        ...state,
+        task: action.payload,
       };
     case "TASK_CREATED":
       return {

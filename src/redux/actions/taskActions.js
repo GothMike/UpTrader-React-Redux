@@ -1,6 +1,10 @@
-export const tasksFetching = () => {
+export const apiUrlTasks = (projectId) =>
+  `https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/${projectId}/Tasks/`;
+
+export const tasksFetching = (id) => {
   return {
     type: "TASKS_FETCHING",
+    payload: id,
   };
 };
 
@@ -10,6 +14,18 @@ export const tasksFetched = (tasks) => {
     payload: tasks,
   };
 };
+
+export const saveUpdatedTask = (projectId, taskId, newTask) => ({
+  type: "SAVE_UPDATED_TASK",
+  projectId,
+  taskId,
+  newTask,
+});
+
+export const updateTasks = (updatedTask) => ({
+  type: "UPDATE_TASK",
+  payload: updatedTask,
+});
 
 export const tasksFetchingError = () => {
   return {
