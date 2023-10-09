@@ -12,7 +12,7 @@ const TaskList = ({ title, tasks, id }) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
-              className="tasks__list"
+              className="task__list"
             >
               {tasks.map((task, index) => (
                 <TaskItem key={index} task={task} index={index} />

@@ -23,16 +23,11 @@ export function* fetchTasksSaga(action) {
 }
 
 export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
-  console.log(projectId);
-  console.log(taskId);
-  console.log(newTask);
-
   try {
     yield axios.put(
       `https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/${projectId}/Tasks/${taskId}`,
       newTask
     );
-    yield console.log("success");
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }

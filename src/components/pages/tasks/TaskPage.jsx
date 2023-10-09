@@ -66,14 +66,14 @@ const TaskPage = () => {
     dispatch(saveUpdatedTask(taskId, updatedTask.id, updatedTask));
   };
 
-  function getListById(listId) {
+  const getListById = (listId) => {
     if (listId === "1") return queue;
     if (listId === "2") return development;
     if (listId === "3") return completed;
     return [];
-  }
+  };
 
-  function updateListById(listId, updatedList) {
+  const updateListById = (listId, updatedList) => {
     if (listId === "1") {
       setQueue(updatedList);
     } else if (listId === "2") {
@@ -81,15 +81,15 @@ const TaskPage = () => {
     } else if (listId === "3") {
       setCompleted(updatedList);
     }
-  }
+  };
 
-  function findItemById(id, array) {
+  const findItemById = (id, array) => {
     return array.find((item) => item.id === id);
-  }
+  };
 
-  function removeItemById(id, array) {
+  const removeItemById = (id, array) => {
     return array.filter((item) => item.id !== id);
-  }
+  };
 
   return (
     <Container>

@@ -1,9 +1,12 @@
 .task {
   margin-top: 6em;
   &__board {
+    display: flex;
+    flex-direction: column;
     width: 33%;
     height: 500px;
-    border: 5px solid pink;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
+    margin: 1em;
   }
   &__title {
     border-bottom: 1px solid rgba(40, 54, 85, 0.3);
@@ -11,15 +14,60 @@
   &__boards {
     display: flex;
   }
-  &__card {
-    width: var(100% -1px);
-    height: 50px;
-    border-radius: 5px;
-    border: 1px solid;
+  &__list {
+    width: 100%;
     display: flex;
-    cursor: grab;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__subtitle {
+    text-align: center;
+  }
+  &__card {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
     user-select: none;
+    border: 2px solid var(--color-priority-low);
+    cursor: pointer !important;
     margin-bottom: 5px;
-    background-color: var(--background-color-modal-btn);
+    color: var(--primary-color);
+    backdrop-filter: blur(5px);
+    box-shadow: 3px 5px rgba(0, 0, 0, 0.15);
+    transition: all 0.5s;
+    &_highPriority {
+      border: 2px solid var(--color-priority-high);
+    }
+    &-priority {
+      position: relative;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 3px solid var(--color-priority-low);
+      &:hover {
+        transition: all 5s;
+        &::after {
+          content: "✔";
+          font-size: 13px;
+          color: var(--color-priority-low);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      &_high {
+        border: 3px solid var(--color-priority-high);
+        &:hover {
+          &::after {
+            color: var(--color-priority-high);
+          }
+        }
+      }
+    }
   }
 }
