@@ -7,7 +7,7 @@ const Header = () => {
   const id = useParams();
   const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-  const Create = isEmpty(id) ? <ProjectCreate /> : <TaskCreate />;
+  const Create = isEmpty(id) ? <ProjectCreate /> : <TaskCreate id={id} />;
 
   return (
     <>

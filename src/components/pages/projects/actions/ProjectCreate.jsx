@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toogleModal, projectCreated } from "../../../../redux/actions/projectActions";
+import { projectCreated } from "../../../../redux/actions/projectActions";
+import { toogleModal } from "../../../../redux/actions/modalActions";
 import { createPortal } from "react-dom";
 
 const ProjectCreate = () => {

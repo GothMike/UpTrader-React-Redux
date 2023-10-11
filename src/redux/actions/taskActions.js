@@ -1,5 +1,5 @@
-export const apiUrlTasks = (projectId) =>
-  `https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/${projectId}/Tasks/`;
+export const apiUrlTasks = (projectId, taskId = "") =>
+  `https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/${projectId}/Tasks/${taskId}`;
 
 export const tasksFetching = (id) => {
   return {
@@ -33,10 +33,11 @@ export const tasksFetchingError = () => {
   };
 };
 
-export const taskCreated = (task) => {
+export const taskCreated = (task, projectId) => {
   return {
     type: "TASK_CREATED",
     payload: task,
+    projectId,
   };
 };
 

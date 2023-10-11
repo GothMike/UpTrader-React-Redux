@@ -1,10 +1,10 @@
 import { differenceInDays } from "date-fns";
 import { useEffect, useState } from "react";
 
-const DateInput = () => {
+const DateInput = ({ onDatesChange }) => {
   const [timeStart, setTimeStart] = useState();
   const [timeEnd, setTimeEnd] = useState();
-  const [dateDifference, setDateDifference] = useState(null); // Стейт для разницы в днях
+  const [dateDifference, setDateDifference] = useState(null);
 
   useEffect(() => {
     handleDateChange();
@@ -14,10 +14,11 @@ const DateInput = () => {
     if (timeStart && timeEnd) {
       const startDate = new Date(timeStart);
       const endDate = new Date(timeEnd);
-      const daysDifference = differenceInDays(endDate, startDate); // Вычисляем разницу в днях
+      const daysDifference = differenceInDays(endDate, startDate);
       setDateDifference(daysDifference);
+      onDatesChange(timeStart, timeEnd, dateDifference);
     } else {
-      setDateDifference(null); // Если даты не выбраны, обнуляем разницу
+      setDateDifference(null);
     }
   };
 
@@ -27,6 +28,7 @@ const DateInput = () => {
         <div className="date-input__wrapper">
           <label htmlFor="startDate">Введите начальную дату</label>
           <input
+            required
             type="date"
             id="start"
             name="startDate"
@@ -40,11 +42,12 @@ const DateInput = () => {
           />
         </div>
         <div className="date-input__wrapper">
-          <label htmlFor="startDate">Введите окончательную дату</label>
+          <label htmlFor="endDate">Введите окончательную дату</label>
           <input
+            required
             type="date"
             id="end"
-            name="trip-end"
+            name="endDate"
             value={timeEnd}
             min="2023-10-09"
             max="2023-12-31"

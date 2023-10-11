@@ -13,6 +13,10 @@
   visibility: hidden;
   transition: all 1 ease-in-out;
   animation: fadeInModal 1s;
+  &_task {
+    height: 30rem;
+    width: 30rem;
+  }
   &_active {
     opacity: 1;
     visibility: visible;

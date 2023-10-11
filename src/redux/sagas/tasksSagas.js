@@ -24,10 +24,7 @@ export function* fetchTasksSaga(action) {
 
 export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
   try {
-    yield axios.put(
-      `https://651b2642194f77f2a5ae49fd.mockapi.io/api/Projects/${projectId}/Tasks/${taskId}`,
-      newTask
-    );
+    yield axios.put(apiUrlTasks(projectId, taskId), newTask);
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }
@@ -41,17 +38,17 @@ export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
 //   }
 // }
 
-// export function* createProjectSaga(action) {
-//   try {
-//     yield call(() => axios.post(apiUrl("Projects"), action.payload));
-//     yield put(projectCreateSuccess());
-//     yield put(projectsFetching());
-//     yield delay(2000);
-//     yield put(disabledModalCreateSuccess());
-//   } catch (error) {
-//     console.error("Произошла ошибка при создании проекта:", error);
-//   }
-// }
+export function* createTaskSaga(action, projectId) {
+  try {
+    yield call(() => axios.post(apiUrlTasks(action.projectId), action.payload));
+    yield put(taskCreateSuccess());
+    yield put(tasksFetching());
+    yield delay(2000);
+    yield put(disabledModalCreateSuccess());
+  } catch (error) {
+    console.error("Произошла ошибка при создании задачи:", error);
+  }
+}
 
 // export function* updateProjectSaga(action) {
 //   try {
@@ -67,8 +64,8 @@ export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
 export function* watchTasksActions() {
   yield takeLatest("TASKS_FETCHING", fetchTasksSaga);
   yield takeLatest("SAVE_UPDATED_TASK", saveUpdatedTasksSaga);
+  yield takeLatest("TASK_CREATED", createTaskSaga);
 
   //   yield takeLatest("PROJECT_DELETED", deleteProjectSaga);
-  //   yield takeLatest("PROJECT_CREATED", createProjectSaga);
   //   yield takeLatest("PROJECT_UPDATED", updateProjectSaga);
 }

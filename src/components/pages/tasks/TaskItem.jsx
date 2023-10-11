@@ -25,9 +25,7 @@ const TaskItem = ({ task, index }) => {
           <div className="task__card-header">
             <div className="task__card-number">{taskNumber}</div>
             <div className="task__card-title">{title}</div>
-            <DateInput />
           </div>
-
           {priorityView}
           {provided.placeholder}
         </div>
