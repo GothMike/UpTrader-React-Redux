@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 
 const ProjectItem = ({ name, id }) => {
   return (
-    <li>
-      <Link key={id} className="projects__item" to={`/projects/${id}`}>
-        <div className="projects__item-name">{name}</div>
+    <li key={id}>
+      <div className="projects__item">
+        <Link to={`/projects/${id}`} className="projects__item-name">
+          {name}
+        </Link>
         <div className="projects__item-buttons">
           <ProjectEdit id={id} />
           <ProjectDelete id={id} />
         </div>
-      </Link>
+      </div>
     </li>
   );
 };

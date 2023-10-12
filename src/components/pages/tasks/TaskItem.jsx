@@ -1,12 +1,10 @@
 import { Draggable } from "react-beautiful-dnd";
-import DateInput from "../../dateInput/DateInput";
 
 const TaskItem = ({ task, index }) => {
   const { id, title, taskNumber, priority } = task;
+  const cardView = !priority ? "task__card" : "task__card task__card_highPriority";
 
-  const cardView = priority ? "task__card" : "task__card task__card_highPriority";
-
-  const priorityView = priority ? (
+  const priorityView = !priority ? (
     <div className="task__card-priority"></div>
   ) : (
     <div className="task__card-priority task__card-priority_high"></div>

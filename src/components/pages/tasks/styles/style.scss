@@ -64,6 +64,7 @@
         border: 3px solid var(--color-priority-high);
         &:hover {
           &::after {
+            content: "!";
             color: var(--color-priority-high);
           }
         }

@@ -6,6 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { tasksFetching, saveUpdatedTask } from "../../../redux/actions/taskActions";
 import { useParams } from "react-router-dom";
+import TaskCard from "./TaskCard";
 
 const TaskPage = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -28,6 +29,20 @@ const TaskPage = () => {
     const queueTasks = arr.filter((task) => task.isQueue);
     const developmentTasks = arr.filter((task) => task.isDevelopment);
     const completedTasks = arr.filter((task) => task.isDone);
+
+    queueTasks.sort((a, b) => a.taskNumber - b.taskNumber);
+    queueTasks.forEach((task, index) => {
+      task.taskNumber = index + 1;
+    });
+    developmentTasks.sort((a, b) => a.taskNumber - b.taskNumber);
+    developmentTasks.forEach((task, index) => {
+      task.taskNumber = index + 1;
+    });
+
+    completedTasks.sort((a, b) => a.taskNumber - b.taskNumber);
+    completedTasks.forEach((task, index) => {
+      task.taskNumber = index + 1;
+    });
 
     setQueue(queueTasks);
     setDevelopment(developmentTasks);
@@ -61,9 +76,8 @@ const TaskPage = () => {
     updateListById(source.droppableId, updatedSourceList);
     updateListById(destination.droppableId, updatedDestinationList);
 
-    console.log(taskId);
-    console.log(updatedTask.id);
     dispatch(saveUpdatedTask(taskId, updatedTask.id, updatedTask));
+    dispatch(tasksFetching(taskId));
   };
 
   const getListById = (listId) => {
@@ -103,6 +117,7 @@ const TaskPage = () => {
             <TaskList title={"Выполнено"} tasks={completed} id={"3"} />
           </div>
         </DragDropContext>
+        <TaskCard />
       </section>
     </Container>
   );

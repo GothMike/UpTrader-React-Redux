@@ -14,8 +14,8 @@ const TaskList = ({ title, tasks, id }) => {
               isDraggingOver={snapshot.isDraggingOver}
               className="task__list"
             >
-              {tasks.map((task, index) => (
-                <TaskItem key={index} task={task} index={index} />
+              {tasks.map((task) => (
+                <TaskItem key={task.id} task={task} index={task.taskNumber} />
               ))}
               {provided.placeholder}
             </div>

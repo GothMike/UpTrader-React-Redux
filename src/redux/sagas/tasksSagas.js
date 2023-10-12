@@ -25,6 +25,7 @@ export function* fetchTasksSaga(action) {
 export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
   try {
     yield axios.put(apiUrlTasks(projectId, taskId), newTask);
+    yield put(tasksFetching(projectId));
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }
@@ -38,11 +39,11 @@ export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
 //   }
 // }
 
-export function* createTaskSaga(action, projectId) {
+export function* createTaskSaga(action) {
   try {
     yield call(() => axios.post(apiUrlTasks(action.projectId), action.payload));
     yield put(taskCreateSuccess());
-    yield put(tasksFetching());
+    yield put(tasksFetching(action.projectId));
     yield delay(2000);
     yield put(disabledModalCreateSuccess());
   } catch (error) {

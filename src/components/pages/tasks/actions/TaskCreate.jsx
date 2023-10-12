@@ -13,7 +13,7 @@ const TaskCreate = ({ id }) => {
   const [files, setFiles] = useState([]);
   const [timeStart, setTimeStart] = useState();
   const [timeEnd, setTimeEnd] = useState();
-  const [dateDifference, setDateDifference] = useState(null);
+  const [dateDifference, setDateDifference] = useState();
 
   const modalCreateActive = useSelector((state) => state.projects.modalCreateActive);
   const modalCreateSuccess = useSelector((state) => state.projects.modalCreateSuccess);
@@ -24,7 +24,7 @@ const TaskCreate = ({ id }) => {
     setDateDifference(dateDifference);
   };
 
-  const SuccessModal = modalCreateSuccess ? (
+  const successModal = modalCreateSuccess ? (
     <div className="modal__success">Успешно создано!</div>
   ) : null;
 
@@ -63,12 +63,13 @@ const TaskCreate = ({ id }) => {
 
     dispatch(taskCreated(newTask, id.taskId));
     dispatch(toogleModal(modalCreateActive));
+    setTitle("");
     setDescription("");
-    setPriority(false);
     setFiles([]);
-    setTimeStart("");
-    setTimeEnd("");
+    setTimeStart(null);
+    setTimeEnd(null);
     setDateDifference("");
+    setPriority(false);
   };
 
   return (
@@ -80,67 +81,92 @@ const TaskCreate = ({ id }) => {
         <>
           <div className={`modal modal_task ${modalActive}`}>
             <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
-              <h2 className="modal__title">Создание задачи</h2>
-              <div
-                onClick={() => dispatch(toogleModal(modalCreateActive))}
-                className="modal__close"
-              >
-                &times;
-              </div>
-              <div className="modal__wrapper">
-                <label htmlFor="title">Название задачи</label>
-                <input
-                  required
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  type="text"
-                  name="title"
-                  className="modal__input"
-                  id="name"
-                  placeholder="Введите название задачи"
-                  disabled={!modalCreateActive}
-                />
-                <label htmlFor="descr">Описание задачи</label>
-                <input
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  type="text"
-                  name="descr"
-                  className="modal__input"
-                  id="name"
-                  placeholder="Введите описание задачи"
-                  disabled={!modalCreateActive}
-                />
-                <label htmlFor="checkbox">Поставить высокий приоритет задачи?</label>
-                <input
-                  value={priority}
-                  onChange={(e) => setPriority(e.target.value)}
-                  type="checkbox"
-                  name="checkbox"
-                  className="modal__input"
-                  id="name"
-                  placeholder="Введите описание задачи"
-                  disabled={!modalCreateActive}
-                />
-                <label htmlFor="files">Вложенные файлы</label>
-                <input
-                  value={files}
-                  onChange={(e) => setFiles(e.target.value)}
-                  type="file"
-                  name="files"
-                  className="modal__input"
-                  id="name"
-                  placeholder="Введите описание задачи"
-                  disabled={!modalCreateActive}
-                />
-                <label htmlFor="files">Выберите даты работы с задачей</label>
-                <DateInput onDatesChange={handleDateDataChange} />
+              <div className="modal__header">
+                <h2 className="modal__title">Создание задачи</h2>
+                <div
+                  onClick={() => dispatch(toogleModal(modalCreateActive))}
+                  className="modal__close"
+                >
+                  &times;
+                </div>
               </div>
 
-              <button type="submit" className="button">
-                Создать
-              </button>
+              <div className="modal__wrapper modal__wrapper_task">
+                <div className="modal__item">
+                  <label htmlFor="title">Название задачи:</label>
+                  <input
+                    required
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    type="text"
+                    name="title"
+                    className="modal__input"
+                    id="text"
+                    placeholder="Введите название задачи"
+                    disabled={!modalCreateActive}
+                  />
+                </div>
+                <div className="modal__item">
+                  <label htmlFor="descr">Описание задачи:</label>
+                  <textarea
+                    required
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    type="textarea"
+                    name="descr"
+                    className="modal__input"
+                    id="descr"
+                    placeholder="Введите описание задачи"
+                    disabled={!modalCreateActive}
+                  />
+                </div>
+
+                <DateInput onDatesChange={handleDateDataChange} />
+                <div className="modal__item">
+                  <label htmlFor="files">Вложенные файлы</label>
+                  <input
+                    value={files}
+                    onChange={(e) => setFiles(e.target.value)}
+                    type="file"
+                    name="files"
+                    className="modal__input"
+                    id="files"
+                    disabled={!modalCreateActive}
+                  />
+                </div>
+              </div>
+
+              <div className="modal__footer modal__footer_task">
+                <div className="modal__item modal__item_checkbox">
+                  <label htmlFor="checkbox">Высокий приоритет?</label>
+                  <input
+                    value={priority}
+                    onChange={() => setPriority(!priority)}
+                    type="checkbox"
+                    name="checkbox"
+                    className="modal__input "
+                    id="checkbox"
+                    disabled={!modalCreateActive}
+                  />
+                </div>
+                <div className="modal__buttons">
+                  <button
+                    disabled={!modalCreateActive}
+                    onClick={() => dispatch(toogleModal(modalCreateActive))}
+                    type="submit"
+                    className="button button_modal_close"
+                  >
+                    Отменить
+                  </button>
+                  <button
+                    disabled={!modalCreateActive}
+                    type="submit"
+                    className="button button_modal"
+                  >
+                    Создать
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
           <div
@@ -151,7 +177,7 @@ const TaskCreate = ({ id }) => {
         document.body
       )}
 
-      {SuccessModal}
+      {successModal}
     </>
   );
 };
