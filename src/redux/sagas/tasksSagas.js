@@ -6,12 +6,10 @@ import {
   tasksFetched,
   tasksFetchingError,
   taskCreateSuccess,
-  disabledModalCreateSuccess,
-  projectUpdatedSuccess,
-  disabledModalUpdateSuccess,
-  updateTasks,
+  taskUpdatedSuccess,
   apiUrlTasks,
 } from "../actions/taskActions";
+import { disabledModalCreateSuccess, disabledModalUpdateSuccess } from "../actions/modalActions";
 
 export function* fetchTasksSaga(action) {
   try {
@@ -22,10 +20,13 @@ export function* fetchTasksSaga(action) {
   }
 }
 
-export function* saveUpdatedTasksSaga({ projectId, taskId, newTask }) {
+export function* updatedTasksSaga({ projectId, taskId, newTask }) {
   try {
     yield axios.put(apiUrlTasks(projectId, taskId), newTask);
     yield put(tasksFetching(projectId));
+    yield put(taskUpdatedSuccess());
+    yield delay(2000);
+    yield put(disabledModalUpdateSuccess());
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }
@@ -51,22 +52,19 @@ export function* createTaskSaga(action) {
   }
 }
 
-// export function* updateProjectSaga(action) {
-//   try {
-//     yield call(() => axios.put(apiUrl(`Projects/${action.payload.id}`), action.payload));
-//     yield put(projectUpdatedSuccess());
-//     yield delay(2000);
-//     yield put(disabledModalUpdateSuccess());
-//   } catch (error) {
-//     console.error("Произошла ошибка при обновлении проекта:", error);
-//   }
-// }
-
+export function* moveTasks({ projectId, taskId, newTask }) {
+  try {
+    yield axios.put(apiUrlTasks(projectId, taskId), newTask);
+    yield put(tasksFetching(projectId));
+  } catch (error) {
+    console.log(`Ошибка при редактировании ${error}`);
+  }
+}
 export function* watchTasksActions() {
   yield takeLatest("TASKS_FETCHING", fetchTasksSaga);
-  yield takeLatest("SAVE_UPDATED_TASK", saveUpdatedTasksSaga);
+  yield takeLatest("UPDATE_TASK", updatedTasksSaga);
   yield takeLatest("TASK_CREATED", createTaskSaga);
+  yield takeLatest("MOVE_TASK", moveTasks);
 
   //   yield takeLatest("PROJECT_DELETED", deleteProjectSaga);
-  //   yield takeLatest("PROJECT_UPDATED", updateProjectSaga);
 }

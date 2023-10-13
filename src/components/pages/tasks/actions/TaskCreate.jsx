@@ -12,21 +12,16 @@ const TaskCreate = ({ id }) => {
   const [priority, setPriority] = useState(false);
   const [files, setFiles] = useState([]);
   const [timeStart, setTimeStart] = useState();
-  const [timeEnd, setTimeEnd] = useState();
+  const [timeEnd, setTimeEnd] = useState(null);
   const [dateDifference, setDateDifference] = useState();
 
-  const modalCreateActive = useSelector((state) => state.projects.modalCreateActive);
-  const modalCreateSuccess = useSelector((state) => state.projects.modalCreateSuccess);
+  const modalCreateActive = useSelector((state) => state.tasks.modalCreateActive);
 
   const handleDateDataChange = (timeStart, timeEnd, dateDifference) => {
     setTimeStart(timeStart);
     setTimeEnd(timeEnd);
     setDateDifference(dateDifference);
   };
-
-  const successModal = modalCreateSuccess ? (
-    <div className="modal__success">Успешно создано!</div>
-  ) : null;
 
   const modalActive = modalCreateActive ? "modal_active" : "";
   const overlayActive = modalCreateActive ? "modal__overlay_active" : "";
@@ -176,8 +171,6 @@ const TaskCreate = ({ id }) => {
         </>,
         document.body
       )}
-
-      {successModal}
     </>
   );
 };

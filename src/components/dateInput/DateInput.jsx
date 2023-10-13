@@ -10,6 +10,7 @@ const DateInput = ({ onDatesChange }) => {
 
   useEffect(() => {
     handleDateChange();
+    // eslint-disable-next-line
   }, [timeStart, timeEnd]);
 
   const handleDateChange = () => {

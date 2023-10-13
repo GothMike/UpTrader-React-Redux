@@ -44,6 +44,7 @@ export function* createProjectSaga(action) {
 export function* updateProjectSaga(action) {
   try {
     yield call(() => axios.put(apiUrl(`Projects/${action.payload.id}`), action.payload));
+    yield put(projectsFetching());
     yield put(projectUpdatedSuccess());
     yield delay(2000);
     yield put(disabledModalUpdateSuccess());

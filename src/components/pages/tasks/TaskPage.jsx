@@ -4,13 +4,23 @@ import { useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { tasksFetching, saveUpdatedTask } from "../../../redux/actions/taskActions";
+import { tasksFetching, moveTasks } from "../../../redux/actions/taskActions";
 import { useParams } from "react-router-dom";
 import TaskCard from "./TaskCard";
 
 const TaskPage = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
   const { taskId } = useParams();
+
+  const modalCreateSuccess = useSelector((state) => state.tasks.modalCreateSuccess);
+  const modalUpdateSuccess = useSelector((state) => state.tasks.modalUpdateSuccess);
+
+  const successModal = modalCreateSuccess ? (
+    <div className="modal__success">Успешно создано!</div>
+  ) : null;
+  const modalUpdate = modalUpdateSuccess ? (
+    <div className="modal__success">Успешно отредактировано!</div>
+  ) : null;
 
   const [queue, setQueue] = useState([]);
   const [development, setDevelopment] = useState([]);
@@ -76,8 +86,7 @@ const TaskPage = () => {
     updateListById(source.droppableId, updatedSourceList);
     updateListById(destination.droppableId, updatedDestinationList);
 
-    dispatch(saveUpdatedTask(taskId, updatedTask.id, updatedTask));
-    dispatch(tasksFetching(taskId));
+    dispatch(moveTasks(taskId, updatedTask.id, updatedTask));
   };
 
   const getListById = (listId) => {
@@ -119,6 +128,8 @@ const TaskPage = () => {
         </DragDropContext>
         <TaskCard />
       </section>
+      {successModal}
+      {modalUpdate}
     </Container>
   );
 };

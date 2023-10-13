@@ -15,16 +15,18 @@ export const tasksFetched = (tasks) => {
   };
 };
 
-export const saveUpdatedTask = (projectId, taskId, newTask) => ({
-  type: "SAVE_UPDATED_TASK",
+export const moveTasks = (projectId, taskId, newTask) => ({
+  type: "MOVE_TASK",
   projectId,
   taskId,
   newTask,
 });
 
-export const updateTasks = (updatedTask) => ({
+export const updateTasks = (projectId, taskId, newTask) => ({
   type: "UPDATE_TASK",
-  payload: updatedTask,
+  projectId,
+  taskId,
+  newTask,
 });
 
 export const tasksFetchingError = () => {
@@ -65,33 +67,5 @@ export const taskDeleted = (id) => {
   return {
     type: "TASK_DELETED",
     payload: id,
-  };
-};
-
-export const toogleModal = (isActive) => {
-  return {
-    type: "TOOGLE_MODAL",
-    payload: !isActive,
-  };
-};
-
-export const disabledModalCreateSuccess = (isActive) => {
-  return {
-    type: "DISABLED_CREATE_MODAL_SUCCESS",
-    payload: !isActive,
-  };
-};
-
-export const disabledModalUpdateSuccess = (isActive) => {
-  return {
-    type: "DISABLED_UPDATE_MODAL_SUCCESS",
-    payload: !isActive,
-  };
-};
-
-export const searchEnteredData = (query) => {
-  return {
-    type: "UPDATE_SEARCH_QUERY",
-    payload: query,
   };
 };

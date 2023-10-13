@@ -1,6 +1,8 @@
 import { Draggable } from "react-beautiful-dnd";
+import Delete from "../../../assets/Delete.svg";
+import TaskEdit from "./actions/TaskEdit";
 
-const TaskItem = ({ task, index }) => {
+const TaskItem = ({ task }) => {
   const { id, title, taskNumber, priority } = task;
   const cardView = !priority ? "task__card" : "task__card task__card_highPriority";
 
@@ -11,7 +13,7 @@ const TaskItem = ({ task, index }) => {
   );
 
   return (
-    <Draggable draggableId={`${id}`} key={id} index={index}>
+    <Draggable draggableId={`${id}`} key={id} index={taskNumber}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -24,7 +26,12 @@ const TaskItem = ({ task, index }) => {
             <div className="task__card-number">{taskNumber}</div>
             <div className="task__card-title">{title}</div>
           </div>
-          {priorityView}
+          <div className="task__card-wrapper">
+            <TaskEdit task={task} />
+            <img src={Delete} alt="Delete" />
+            {priorityView}
+          </div>
+
           {provided.placeholder}
         </div>
       )}

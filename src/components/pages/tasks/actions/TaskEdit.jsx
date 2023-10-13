@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { projectUpdated } from "../../../../redux/actions/projectActions";
+import { updateTasks } from "../../../../redux/actions/taskActions";
 import { createPortal } from "react-dom";
+import Change from "../../../../assets/Change.svg";
+import DateInput from "../../../dateInput/DateInput";
 
-const ProjectEdit = ({ id }) => {
+const TaskEdit = ({ task }) => {
+  const { id, title, description, priority, ProjectId, isQueue, isDevelopment, isDone } = task;
+
   const dispatch = useDispatch();
-  const [projectName, setProjectName] = useState("");
-  const modalUpdateSuccess = useSelector((state) => state.projects.modalUpdateSuccess);
   const [portalVisible, setPortalVisible] = useState(false);
-
-  const successModal = modalUpdateSuccess ? (
-    <div className="modal__success">Успешно отредактировано!</div>
-  ) : null;
+  const [updTitle, setUpdTitle] = useState(title);
+  const [updDescription, setUpdDescription] = useState(description);
+  const [updPriority, setUpdPriority] = useState(priority);
+  const [files, setFiles] = useState([]);
+  const [updTimeStart, setUpdTimeStart] = useState();
+  const [updTimeEnd, setUpdTimeEnd] = useState();
+  const [updDateDifference, setUpdDateDifference] = useState();
 
   const modalActive = portalVisible ? "modal_active" : "";
   const overlayActive = portalVisible ? "modal__overlay_active" : "";
@@ -20,6 +25,12 @@ const ProjectEdit = ({ id }) => {
     if (event.key === "Escape" && portalVisible) {
       setPortalVisible(!portalVisible);
     }
+  };
+
+  const handleDateDataChange = (timeStart, timeEnd, dateDifference) => {
+    setUpdTimeStart(timeStart);
+    setUpdTimeEnd(timeEnd);
+    setUpdDateDifference(dateDifference);
   };
 
   useEffect(() => {
@@ -33,13 +44,23 @@ const ProjectEdit = ({ id }) => {
   const onUpdate = (e) => {
     e.preventDefault();
 
-    const editedProject = {
-      id: id,
-      name: projectName,
+    const updatedTask = {
+      isQueue: isQueue,
+      isDevelopment: isDevelopment,
+      isDone: isDone,
+      title: updTitle,
+      description: updDescription,
+      timeOfWork: updDateDifference,
+      dateStart: updTimeStart,
+      dateEnd: updTimeEnd,
+      priority: updPriority,
+      attachedFiles: files,
+      subTasks: [],
+      comments: [],
+      ProjectId: ProjectId,
     };
 
-    dispatch(projectUpdated(editedProject));
-    setProjectName("");
+    dispatch(updateTasks(ProjectId, id, updatedTask));
     setPortalVisible(!portalVisible);
   };
 
@@ -49,31 +70,69 @@ const ProjectEdit = ({ id }) => {
         <>
           {createPortal(
             <>
-              <div className={`modal ${modalActive}`}>
-                <form onSubmit={(e) => onUpdate(e, id)} className={`modal__form `}>
+              <div className={`modal modal_task ${modalActive} `}>
+                <form onSubmit={(e) => onUpdate(e)} className={`modal__form `}>
                   <div className="modal__header">
-                    <h2 className="modal__title">Редактирование</h2>
+                    <h2 className="modal__title">Редактирование задачи</h2>
                     <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
                       &times;
                     </div>
                   </div>
-                  <div className="modal__wrapper">
+
+                  <div className="modal__wrapper modal__wrapper_task">
                     <div className="modal__item">
-                      <label htmlFor="name">Изменить проекта</label>
+                      <label htmlFor="title">Название задачи:</label>
                       <input
                         required
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
+                        value={updTitle}
+                        onChange={(e) => setUpdTitle(e.target.value)}
                         type="text"
-                        name="name"
+                        name="title"
                         className="modal__input"
-                        id="name"
-                        placeholder="Введите новое название"
-                        disabled={!portalVisible}
+                        id="text"
+                        placeholder={title}
+                      />
+                    </div>
+                    <div className="modal__item">
+                      <label htmlFor="descr">Описание задачи:</label>
+                      <textarea
+                        required
+                        value={updDescription}
+                        onChange={(e) => setUpdDescription(e.target.value)}
+                        type="textarea"
+                        name="descr"
+                        className="modal__input"
+                        id="descr"
+                        placeholder={description}
+                      />
+                    </div>
+
+                    <DateInput onDatesChange={handleDateDataChange} />
+                    <div className="modal__item">
+                      <label htmlFor="files">Вложенные файлы</label>
+                      <input
+                        value={files}
+                        onChange={(e) => setFiles(e.target.value)}
+                        type="file"
+                        name="files"
+                        className="modal__input"
+                        id="files"
                       />
                     </div>
                   </div>
-                  <div className="modal__footer">
+
+                  <div className="modal__footer modal__footer_task">
+                    <div className="modal__item modal__item_checkbox">
+                      <label htmlFor="checkbox">Высокий приоритет?</label>
+                      <input
+                        checked={updPriority}
+                        onClick={() => setUpdPriority(!updPriority)}
+                        type="checkbox"
+                        name="checkbox"
+                        className="modal__input "
+                        id="checkbox"
+                      />
+                    </div>
                     <div className="modal__buttons">
                       <button
                         onClick={() => setPortalVisible(!portalVisible)}
@@ -91,8 +150,7 @@ const ProjectEdit = ({ id }) => {
               </div>
               <div
                 onClick={() => setPortalVisible(!portalVisible)}
-                disabled={portalVisible}
-                className={`modal__overlay ${overlayActive} `}
+                className={`modal__overlay ${overlayActive}`}
               ></div>
             </>,
             document.body
@@ -106,13 +164,10 @@ const ProjectEdit = ({ id }) => {
 
   return (
     <>
-      <button onClick={() => setPortalVisible(!portalVisible)} className="button button__edit">
-        Редактировать
-      </button>
-      {successModal}
+      <img onClick={() => setPortalVisible(!portalVisible)} src={Change} alt="Change" />
       {renderPortal()}
     </>
   );
 };
 
-export default ProjectEdit;
+export default TaskEdit;
