@@ -32,13 +32,15 @@ export function* updatedTasksSaga({ projectId, taskId, newTask }) {
   }
 }
 
-// export function* deleteProjectSaga(action) {
-//   try {
-//     yield call(() => axios.delete(apiUrl(`Projects/${action.payload}`)));
-//   } catch (error) {
-//     console.error("Ошибка при удалении проекта:", error);
-//   }
-// }
+export function* deleteTaskSaga({ task }) {
+  try {
+    const { ProjectId, id } = task;
+    yield call(() => axios.delete(apiUrlTasks(ProjectId, id)));
+    yield put(tasksFetching(ProjectId));
+  } catch (error) {
+    console.error("Ошибка при удалении задачи:", error);
+  }
+}
 
 export function* createTaskSaga(action) {
   try {
@@ -57,7 +59,7 @@ export function* moveTasks({ projectId, taskId, newTask }) {
     yield axios.put(apiUrlTasks(projectId, taskId), newTask);
     yield put(tasksFetching(projectId));
   } catch (error) {
-    console.log(`Ошибка при редактировании ${error}`);
+    console.log(`Ошибка при перемещении ${error}`);
   }
 }
 export function* watchTasksActions() {
@@ -65,6 +67,5 @@ export function* watchTasksActions() {
   yield takeLatest("UPDATE_TASK", updatedTasksSaga);
   yield takeLatest("TASK_CREATED", createTaskSaga);
   yield takeLatest("MOVE_TASK", moveTasks);
-
-  //   yield takeLatest("PROJECT_DELETED", deleteProjectSaga);
+  yield takeLatest("TASK_DELETED", deleteTaskSaga);
 }

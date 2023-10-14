@@ -107,7 +107,7 @@ const TaskEdit = ({ task }) => {
                       />
                     </div>
 
-                    <DateInput onDatesChange={handleDateDataChange} />
+                    <DateInput endTime={task.dateEnd} onDatesChange={handleDateDataChange} />
                     <div className="modal__item">
                       <label htmlFor="files">Вложенные файлы</label>
                       <input

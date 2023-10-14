@@ -1,7 +1,7 @@
 import { differenceInDays, format } from "date-fns";
 import { useEffect, useState } from "react";
 
-const DateInput = ({ onDatesChange }) => {
+const DateInput = ({ endTime, onDatesChange }) => {
   const currentDate = new Date();
   const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
@@ -48,7 +48,7 @@ const DateInput = ({ onDatesChange }) => {
           type="date"
           id="end"
           name="endDate"
-          value={timeEnd}
+          value={endTime}
           min={timeStart}
           max="2023-12-31"
           className="modal__input"

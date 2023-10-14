@@ -42,6 +42,12 @@ export const taskCreated = (task, projectId) => {
     projectId,
   };
 };
+export const taskDeleted = (task) => {
+  return {
+    type: "TASK_DELETED",
+    task,
+  };
+};
 
 export const taskCreateSuccess = () => {
   return {
@@ -60,12 +66,5 @@ export const taskUpdatedSuccess = (isActive) => {
   return {
     type: "TASK_UPDATED_SUCCESS",
     payload: !isActive,
-  };
-};
-
-export const taskDeleted = (id) => {
-  return {
-    type: "TASK_DELETED",
-    payload: id,
   };
 };
