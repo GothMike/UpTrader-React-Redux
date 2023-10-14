@@ -16,9 +16,11 @@
   &_task {
     height: 30rem;
     width: 30rem;
-    &-edit {
+    &-card {
       opacity: 1;
       visibility: visible;
+      width: 40rem;
+      height: 40rem;
     }
   }
   &_active {
@@ -77,6 +79,9 @@
     justify-content: space-evenly;
     &_task {
       height: 75%;
+      &-card {
+        justify-content: flex-start;
+      }
     }
   }
   &__input {

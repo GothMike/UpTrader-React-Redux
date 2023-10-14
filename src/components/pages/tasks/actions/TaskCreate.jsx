@@ -31,6 +31,7 @@ const TaskCreate = ({ id }) => {
       dispatch(toogleModal(modalCreateActive));
     }
   };
+
   useEffect(() => {
     window.addEventListener("keydown", handleEscKey);
     return () => {

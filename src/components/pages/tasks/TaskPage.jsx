@@ -6,7 +6,6 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { tasksFetching, moveTasks } from "../../../redux/actions/taskActions";
 import { useParams } from "react-router-dom";
-import TaskCard from "./TaskCard";
 
 const TaskPage = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -126,7 +125,6 @@ const TaskPage = () => {
             <TaskList title={"Выполнено"} tasks={completed} id={"3"} />
           </div>
         </DragDropContext>
-        <TaskCard />
       </section>
       {successModal}
       {modalUpdate}

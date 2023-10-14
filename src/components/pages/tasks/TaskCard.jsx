@@ -1,103 +1,70 @@
+import { createPortal } from "react-dom";
 import { useState } from "react";
-import DateInput from "../../dateInput/DateInput";
+import Change from "../../../assets/Change.svg";
+import Delete from "../../../assets/Delete.svg";
+import SubtaskCreate from "./actions/subtasks/SubtaskCreate";
 
-const TaskCard = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState(false);
-  const [files, setFiles] = useState([]);
-  const [timeStart, setTimeStart] = useState();
-  const [timeEnd, setTimeEnd] = useState();
-  const [dateDifference, setDateDifference] = useState();
+const TaskCard = ({ task }) => {
+  const [portalVisible, setPortalVisible] = useState(false);
 
-  const handleDateDataChange = (timeStart, timeEnd, dateDifference) => {
-    setTimeStart(timeStart);
-    setTimeEnd(timeEnd);
-    setDateDifference(dateDifference);
+  const { id, title, description, subTasks, priority, ProjectId, isQueue, isDevelopment, isDone } =
+    task;
+
+  const renderPortal = () => {
+    if (portalVisible) {
+      return (
+        <>
+          {createPortal(
+            <>
+              <div className={`modal modal_task modal_task-card`}>
+                <div className="modal__header">
+                  <h2 className="modal__title">Редактирование задачи</h2>
+                  <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
+                    &times;
+                  </div>
+                </div>
+                <div className="modal__wrapper modal__wrapper_task modal__wrapper_task-card">
+                  <div className="modal__item modal__item-card">
+                    <h2>Задача - {title}</h2>
+                  </div>
+                  <div className="modal__item">
+                    <h3>Описание задачи:</h3>
+                    <h4>{description}</h4>
+                  </div>
+                  <div className="subtask">
+                    <h4 className="subtask__header">Подзадачи</h4>
+                    {subTasks.map((task) => (
+                      <div key={task.id} className="subtask__card">
+                        <div className="subtask__leftSide">
+                          <input type="checkbox" className="subtask__checkbox" />
+                          <div className="substask__descr">{task.description}</div>
+                        </div>
+                        <div className="subtask__rightSide">
+                          <img src={Change} alt="Change" />
+                          <img src={Delete} alt="Delete" />
+                        </div>
+                      </div>
+                    ))}
+                    <SubtaskCreate />
+                  </div>
+                </div>
+
+                <div className="modal__footer modal__footer_task"></div>
+              </div>
+            </>,
+
+            document.body
+          )}
+        </>
+      );
+    } else {
+      return null;
+    }
   };
-
   return (
     <>
-      <div className={`modal modal_task  }`}>
-        <form className={`modal__form `}>
-          <div className="modal__header">
-            <h2 className="modal__title">Редактирование задачи</h2>
-            <div className="modal__close">&times;</div>
-          </div>
-
-          <div className="modal__wrapper modal__wrapper_task">
-            <div className="modal__item">
-              <label htmlFor="title">Название задачи:</label>
-              <input
-                required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                type="text"
-                name="title"
-                className="modal__input"
-                id="text"
-                placeholder={title}
-              />
-            </div>
-            <div className="modal__item">
-              <label htmlFor="descr">Описание задачи:</label>
-              <textarea
-                required
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                type="textarea"
-                name="descr"
-                className="modal__input"
-                id="descr"
-                placeholder={description}
-              />
-            </div>
-
-            <DateInput onDatesChange={handleDateDataChange} />
-            <div className="modal__item">
-              <label htmlFor="files">Вложенные файлы</label>
-              <input
-                value={files}
-                onChange={(e) => setFiles(e.target.value)}
-                type="file"
-                name="files"
-                className="modal__input"
-                id="files"
-              />
-            </div>
-          </div>
-
-          <div className="modal__footer modal__footer_task">
-            <div className="modal__item modal__item_checkbox">
-              <label htmlFor="checkbox">Высокий приоритет?</label>
-              <input
-                value={priority}
-                onChange={() => setPriority(!priority)}
-                type="checkbox"
-                name="checkbox"
-                className="modal__input "
-                id="checkbox"
-              />
-            </div>
-            <div className="modal__buttons">
-              <button
-                // onClick={() => dispatch(toogleModal(modalCreateActive))}
-                type="submit"
-                className="button button_modal_close"
-              >
-                Отменить
-              </button>
-              <button type="submit" className="button button_modal">
-                Создать
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      {/* <div
-        onClick={() => dispatch(toogleModal(modalCreateActive))}
-        className={`modal__overlay ${overlayActive}`}
-      ></div> */}
+      <h2 onClick={() => setPortalVisible(!portalVisible)}>Тест</h2>
+      {renderPortal()}
     </>
   );
 };
