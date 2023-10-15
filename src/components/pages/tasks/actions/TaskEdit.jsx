@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTasks } from "../../../../redux/actions/taskActions";
+import { taskUpdated } from "../../../../redux/actions/taskActions";
 import { createPortal } from "react-dom";
 import Change from "../../../../assets/Change.svg";
 import DateInput from "../../../dateInput/DateInput";
@@ -60,7 +60,7 @@ const TaskEdit = ({ task }) => {
       ProjectId: ProjectId,
     };
 
-    dispatch(updateTasks(ProjectId, id, updatedTask));
+    dispatch(taskUpdated(ProjectId, id, updatedTask));
     setPortalVisible(!portalVisible);
   };
 

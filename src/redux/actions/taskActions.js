@@ -15,6 +15,33 @@ export const tasksFetched = (tasks) => {
   };
 };
 
+export const tasksFetchingError = () => {
+  return {
+    type: "TASKS_FETCHING_ERROR",
+  };
+};
+
+export const taskFetching = (projectId, taskId) => {
+  return {
+    type: "TASK_FETCHING",
+    projectId,
+    taskId,
+  };
+};
+
+export const taskFetched = (task) => {
+  return {
+    type: "TASK_FETCHED",
+    payload: task,
+  };
+};
+
+export const taskFetchingError = () => {
+  return {
+    type: "TASK_FETCHING_ERROR",
+  };
+};
+
 export const moveTasks = (projectId, taskId, newTask) => ({
   type: "MOVE_TASK",
   projectId,
@@ -22,18 +49,12 @@ export const moveTasks = (projectId, taskId, newTask) => ({
   newTask,
 });
 
-export const updateTasks = (projectId, taskId, newTask) => ({
-  type: "UPDATE_TASK",
+export const taskUpdated = (projectId, taskId, newTask) => ({
+  type: "TASK_UPDATED",
   projectId,
   taskId,
   newTask,
 });
-
-export const tasksFetchingError = () => {
-  return {
-    type: "TASKS_FETCHING_ERROR",
-  };
-};
 
 export const taskCreated = (task, projectId) => {
   return {
@@ -52,13 +73,6 @@ export const taskDeleted = (task) => {
 export const taskCreateSuccess = () => {
   return {
     type: "TASK_CREATE_SUCCESS",
-  };
-};
-
-export const taskUpdated = (task) => {
-  return {
-    type: "TASK_UPDATED",
-    payload: task,
   };
 };
 

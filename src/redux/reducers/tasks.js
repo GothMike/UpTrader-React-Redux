@@ -1,8 +1,10 @@
 const initialState = {
   tasks: [],
   projectId: "",
+  taskId: "",
   dataEntry: "",
   tasksLoadingStatus: "idle",
+  taskLoadingStatus: "idle",
   modalCreateActive: false,
   modalCreateSuccess: false,
   modalUpdateSuccess: false,
@@ -27,6 +29,24 @@ const tasks = (state = initialState, action) => {
         ...state,
         tasksLoadingStatus: "error",
       };
+    case "TASK_FETCHING":
+      return {
+        ...state,
+        taskLoadingStatus: "loading",
+        projectId: action.projectId,
+        taskId: action.taskId,
+      };
+    case "TASK_FETCHED":
+      return {
+        ...state,
+        task: action.payload,
+        taskLoadingStatus: "idle",
+      };
+    case "TASK_FETCHING_ERROR":
+      return {
+        ...state,
+        taskLoadingStatus: "error",
+      };
     case "TASKS_UPDATE":
       return {
         ...state,
@@ -43,22 +63,6 @@ const tasks = (state = initialState, action) => {
         modalCreateActive: false,
         modalCreateSuccess: true,
       };
-    case "TASK_UPDATED": {
-      const updatedTasks = state.tasks.map((task) => {
-        if (task.id === action.payload.id) {
-          return {
-            ...task,
-            ...action.payload,
-          };
-        }
-        return task;
-      });
-
-      return {
-        ...state,
-        tasks: updatedTasks,
-      };
-    }
     case "TASK_UPDATED_SUCCESS": {
       return {
         ...state,

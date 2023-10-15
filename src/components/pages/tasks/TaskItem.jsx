@@ -6,7 +6,6 @@ import TaskCard from "./TaskCard";
 const TaskItem = ({ task }) => {
   const { id, title, taskNumber, priority } = task;
   const cardView = !priority ? "task__card" : "task__card task__card_highPriority";
-
   const priorityView = !priority ? (
     <div className="task__card-priority"></div>
   ) : (

@@ -2,6 +2,9 @@ import { put, takeLatest, call, delay } from "redux-saga/effects";
 import axios from "axios";
 
 import {
+  taskFetching,
+  taskFetched,
+  taskFetchingError,
   tasksFetching,
   tasksFetched,
   tasksFetchingError,
@@ -20,6 +23,15 @@ export function* fetchTasksSaga(action) {
   }
 }
 
+export function* fetchTaskSaga({ projectId, taskId }) {
+  try {
+    const response = yield call(() => axios.get(apiUrlTasks(projectId, taskId)));
+    yield put(taskFetched(response.data));
+  } catch (error) {
+    yield put(taskFetchingError());
+  }
+}
+
 export function* updatedTasksSaga({ projectId, taskId, newTask }) {
   try {
     yield axios.put(apiUrlTasks(projectId, taskId), newTask);
@@ -27,6 +39,16 @@ export function* updatedTasksSaga({ projectId, taskId, newTask }) {
     yield put(taskUpdatedSuccess());
     yield delay(2000);
     yield put(disabledModalUpdateSuccess());
+  } catch (error) {
+    console.log(`Ошибка при редактировании ${error}`);
+  }
+}
+
+export function* createdSubtasksSaga({ projectId, taskId, newTask }) {
+  try {
+    yield axios.put(apiUrlTasks(projectId, taskId), newTask);
+    yield put(taskFetching(projectId, taskId));
+    yield;
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }
@@ -64,8 +86,10 @@ export function* moveTasks({ projectId, taskId, newTask }) {
 }
 export function* watchTasksActions() {
   yield takeLatest("TASKS_FETCHING", fetchTasksSaga);
-  yield takeLatest("UPDATE_TASK", updatedTasksSaga);
+  yield takeLatest("TASK_FETCHING", fetchTaskSaga);
+  yield takeLatest("TASK_UPDATED", updatedTasksSaga);
   yield takeLatest("TASK_CREATED", createTaskSaga);
-  yield takeLatest("MOVE_TASK", moveTasks);
   yield takeLatest("TASK_DELETED", deleteTaskSaga);
+  yield takeLatest("MOVE_TASK", moveTasks);
+  yield takeLatest("SUBTASK_CREATED", createdSubtasksSaga);
 }

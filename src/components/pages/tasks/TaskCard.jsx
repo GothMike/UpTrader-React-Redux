@@ -1,14 +1,22 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
-import Change from "../../../assets/Change.svg";
-import Delete from "../../../assets/Delete.svg";
-import SubtaskCreate from "./actions/subtasks/SubtaskCreate";
+import { useSelector, useDispatch } from "react-redux";
+import SubtaskCreate from "./subtasks/actions/SubtaskCreate";
+import { useEffect } from "react";
+import { taskFetching } from "../../../redux/actions/taskActions";
+import SubtaskList from "./subtasks/SubtaskList";
 
 const TaskCard = ({ task }) => {
-  const [portalVisible, setPortalVisible] = useState(false);
-
   const { id, title, description, subTasks, priority, ProjectId, isQueue, isDevelopment, isDone } =
     task;
+  const taskEntity = useSelector((state) => state.tasks.task);
+
+  const [portalVisible, setPortalVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(taskFetching(ProjectId, id));
+  }, []);
 
   const renderPortal = () => {
     if (portalVisible) {
@@ -18,7 +26,7 @@ const TaskCard = ({ task }) => {
             <>
               <div className={`modal modal_task modal_task-card`}>
                 <div className="modal__header">
-                  <h2 className="modal__title">Редактирование задачи</h2>
+                  <h2 className="modal__title">Просмотр карточки задачи</h2>
                   <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
                     &times;
                   </div>
@@ -31,28 +39,13 @@ const TaskCard = ({ task }) => {
                     <h3>Описание задачи:</h3>
                     <h4>{description}</h4>
                   </div>
-                  <div className="subtask">
-                    <h4 className="subtask__header">Подзадачи</h4>
-                    {subTasks.map((task) => (
-                      <div key={task.id} className="subtask__card">
-                        <div className="subtask__leftSide">
-                          <input type="checkbox" className="subtask__checkbox" />
-                          <div className="substask__descr">{task.description}</div>
-                        </div>
-                        <div className="subtask__rightSide">
-                          <img src={Change} alt="Change" />
-                          <img src={Delete} alt="Delete" />
-                        </div>
-                      </div>
-                    ))}
-                    <SubtaskCreate />
-                  </div>
+                  <SubtaskList subtask={subTasks} />
+                  <SubtaskCreate task={task} />
                 </div>
 
                 <div className="modal__footer modal__footer_task"></div>
               </div>
             </>,
-
             document.body
           )}
         </>
