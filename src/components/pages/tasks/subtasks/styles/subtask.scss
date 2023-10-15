@@ -1,6 +1,7 @@
 .subtask {
   display: flex;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.945);
   &__header {
     text-align: center;
     font-size: 18px;
@@ -8,25 +9,33 @@
   }
   &__card,
   &__create {
+    position: relative;
     display: flex;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
-    margin: 3px 0;
+    margin: 3px 15px;
     padding: 0 15px;
     justify-content: space-between;
     border: 1px solid rgba(40, 54, 85, 0.3);
     border-radius: 5px;
   }
+  &__completed {
+    text-decoration: line-through;
+  }
   &__leftSide {
     display: flex;
     align-items: center;
-
     input {
       margin-right: 15px;
     }
   }
+  &__wrapper {
+    width: 500px;
+    max-width: 50%;
+  }
   &__rightSide {
-    display: flex;
-    align-items: center;
+    margin-top: 5px;
+    position: fixed;
+    right: 0;
     padding: 0 15px 0 0;
     img {
       margin: 0 15px;
@@ -35,8 +44,8 @@
     }
   }
   &__checkbox {
-    width: 1.3em;
-    height: 1.3em;
+    width: 20px;
+    height: 20px;
     background-color: white;
     border-radius: 50%;
     vertical-align: middle;
@@ -49,8 +58,14 @@
       background-color: gray;
     }
   }
+  &__descr {
+    overflow: hidden;
+  }
   &__create {
-    margin-top: 15px;
+    margin: 15px 25% 0 25%;
+    align-items: center;
+    background-color: rgb(247, 227, 52);
+    justify-content: center;
     cursor: pointer;
     border: none;
     border-bottom: 1px solid rgba(40, 54, 85, 0.3);

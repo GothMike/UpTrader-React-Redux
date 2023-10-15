@@ -75,7 +75,7 @@ const TaskCreate = ({ id }) => {
       </button>
       {createPortal(
         <>
-          <div className={`modal modal_task ${modalActive}`}>
+          <div className={`modal modal__task ${modalActive}`}>
             <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
               <div className="modal__header">
                 <h2 className="modal__title">Создание задачи</h2>

@@ -1,4 +1,4 @@
-import { put, takeLatest, delay } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 import { taskFetching, apiUrlTasks } from "../actions/taskActions";

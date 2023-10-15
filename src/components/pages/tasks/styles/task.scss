@@ -1,21 +1,33 @@
 .task {
   margin-top: 6em;
-  &__board {
-    display: flex;
-    flex-direction: column;
-    width: 33%;
-    height: 500px;
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
-    margin: 1em;
-  }
+  transition: all 0.5s;
+
   &__title {
     border-bottom: 1px solid rgba(40, 54, 85, 0.3);
   }
   &__boards {
     display: flex;
   }
+  &__droppable {
+    transition: all 0.5s;
+    background-color: rgba(69, 153, 201, 0.466);
+  }
+  &__dragging {
+    border: 2px solid rgb(211, 124, 124) !important;
+  }
+  &__board {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
+    margin: 1em;
+    padding: 1em;
+  }
   &__list {
+    overflow: auto;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,9 +39,9 @@
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    padding: 0 5px;
     width: 90%;
-    height: 30px;
+    height: 50px;
     border-radius: 5px;
     user-select: none;
     border: 2px solid var(--color-priority-low);
@@ -39,7 +51,15 @@
     backdrop-filter: blur(5px);
     box-shadow: 3px 5px rgba(0, 0, 0, 0.15);
     transition: all 0.5s;
+    &-title {
+      width: 300px;
+      overflow: hidden;
+    }
+    &-header {
+      overflow: hidden;
+    }
     &-wrapper {
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: space-around;

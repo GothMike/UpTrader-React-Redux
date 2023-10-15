@@ -2,6 +2,7 @@ import { Droppable } from "react-beautiful-dnd";
 import TaskItem from "./TaskItem";
 import Spinner from "../../spinner/Spinner";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const TaskList = ({ title, tasks, id }) => {
   const taskLoadingStatus = useSelector((state) => state.tasks.tasksLoadingStatus);
@@ -45,8 +46,7 @@ const TaskList = ({ title, tasks, id }) => {
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
-                  className="task__list"
+                  className={`task__list ${snapshot.isDraggingOver ? "task__droppable" : ""}`}
                 >
                   {filteredTasks}
                   {provided.placeholder}
@@ -69,6 +69,12 @@ const TaskList = ({ title, tasks, id }) => {
     default:
       return <h2 className="task__subtitle">Глобальная непредвиденная ошибка</h2>;
   }
+};
+
+TaskList.propTypes = {
+  title: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default TaskList;

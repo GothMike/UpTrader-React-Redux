@@ -82,3 +82,10 @@ export const taskUpdatedSuccess = (isActive) => {
     payload: !isActive,
   };
 };
+
+export const chooseTask = (task) => {
+  return {
+    type: "CHOOSE_TASK",
+    payload: task,
+  };
+};

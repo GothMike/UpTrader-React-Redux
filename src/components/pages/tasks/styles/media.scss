@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+  .task {
+    &__boards {
+      flex-wrap: wrap;
+    }
+    &__board {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 500px;
+      max-height: 100%;
+      box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
+      margin: 1em;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .task {
+    &__boards {
+      justify-content: center;
+    }
+    &__board {
+      width: 200px;
+    }
+  }
+}

@@ -58,7 +58,7 @@ const ProjectCreate = () => {
                 </div>
               </div>
 
-              <div className="modal__wrapper">
+              <div className="modal__wrapper modal__wrapper_project">
                 <div className="modal__item">
                   <label htmlFor="name">Название проекта</label>
                   <input
