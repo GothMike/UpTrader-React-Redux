@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toogleModal, projectCreated } from "../../../../redux/actions/projectActions";
+import { projectCreated } from "../../../../redux/actions/projectActions";
+import { toogleModal } from "../../../../redux/actions/modalActions";
 import { createPortal } from "react-dom";
 
 const ProjectCreate = () => {
@@ -47,30 +48,51 @@ const ProjectCreate = () => {
         <>
           <div className={`modal ${modalActive}`}>
             <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
-              <h2 className="modal__title">Создание проекта</h2>
-              <div
-                onClick={() => dispatch(toogleModal(modalCreateActive))}
-                className="modal__close"
-              >
-                &times;
+              <div className="modal__header">
+                <h2 className="modal__title">Создание проекта</h2>
+                <div
+                  onClick={() => dispatch(toogleModal(modalCreateActive))}
+                  className="modal__close"
+                >
+                  &times;
+                </div>
               </div>
+
               <div className="modal__wrapper">
-                <label htmlFor="name">Название проекта</label>
-                <input
-                  required
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}
-                  type="text"
-                  name="name"
-                  className="modal__input"
-                  id="name"
-                  placeholder="Введите название"
-                  disabled={!modalCreateActive}
-                />
+                <div className="modal__item">
+                  <label htmlFor="name">Название проекта</label>
+                  <input
+                    required
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                    type="text"
+                    name="name"
+                    className="modal__input"
+                    id="name"
+                    placeholder="Введите название"
+                    disabled={!modalCreateActive}
+                  />
+                </div>
               </div>
-              <button type="submit" className="button">
-                Создать
-              </button>
+              <div className="modal__footer">
+                <div className="modal__buttons">
+                  <button
+                    disabled={!modalCreateActive}
+                    onClick={() => dispatch(toogleModal(modalCreateActive))}
+                    type="submit"
+                    className="button button_modal_close"
+                  >
+                    Отменить
+                  </button>
+                  <button
+                    disabled={!modalCreateActive}
+                    type="submit"
+                    className="button button_modal"
+                  >
+                    Создать
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
           <div

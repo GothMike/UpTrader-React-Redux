@@ -3,6 +3,8 @@
 @import url(./variables.scss);
 @import url(./animations.scss);
 
+@import url(../components/dateInput/dateInput.scss);
+
 @import url(../components/container/container.scss);
 
 @import url(../components/pages/page404/style.scss);
@@ -19,6 +21,7 @@
 @import url(../components/pages/projects/actions/modals.scss);
 
 @import url(../components/pages/tasks/styles/style.scss);
+@import url(../components/pages/tasks/styles/subtasks.scss);
 
 body {
   font-family: "Gochi Hand", cursive;

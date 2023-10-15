@@ -10,9 +10,10 @@
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  z-index: 3;
   cursor: pointer;
   box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
+  align-items: center;
 
   &:after {
     content: "";
@@ -37,6 +38,37 @@
     border-radius: 10rem;
     z-index: -1;
   }
+  &_modal {
+    border-radius: 0px !important;
+
+    &::after {
+      border-radius: 0px !important;
+    }
+    &::before {
+      border-radius: 0px !important;
+    }
+    &-edit {
+      &:before {
+        background-color: darken(rgb(247, 227, 52), 15%);
+      }
+    }
+  }
+  &_modal_close {
+    border-radius: 0px !important;
+
+    color: var(--primary-color);
+    margin-right: 15px;
+    &::after {
+      border-radius: 0px !important;
+
+      background-color: rgba(255, 255, 255, 0.94) !important;
+    }
+    &::before {
+      border-radius: 0px !important;
+
+      background-color: rgb(185, 183, 166);
+    }
+  }
   &:hover {
     color: #fff;
     &:before {
@@ -45,6 +77,8 @@
   }
   &__edit {
     font-size: 0.5rem;
+    z-index: 3;
+
     &:before {
       background-color: darken(rgb(247, 227, 52), 15%);
     }

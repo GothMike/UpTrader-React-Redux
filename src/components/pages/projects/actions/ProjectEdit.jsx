@@ -43,8 +43,6 @@ const ProjectEdit = ({ id }) => {
     setPortalVisible(!portalVisible);
   };
 
-  console.log(`PortalVisb ${portalVisible}`);
-
   const renderPortal = () => {
     if (portalVisible) {
       return (
@@ -53,27 +51,42 @@ const ProjectEdit = ({ id }) => {
             <>
               <div className={`modal ${modalActive}`}>
                 <form onSubmit={(e) => onUpdate(e, id)} className={`modal__form `}>
-                  <h2 className="modal__title">Редактирование</h2>
-                  <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
-                    &times;
+                  <div className="modal__header">
+                    <h2 className="modal__title">Редактирование</h2>
+                    <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
+                      &times;
+                    </div>
                   </div>
                   <div className="modal__wrapper">
-                    <label htmlFor="name">Изменить проекта</label>
-                    <input
-                      required
-                      value={projectName}
-                      onChange={(e) => setProjectName(e.target.value)}
-                      type="text"
-                      name="name"
-                      className="modal__input"
-                      id="name"
-                      placeholder="Введите новое название"
-                      disabled={!portalVisible}
-                    />
+                    <div className="modal__item">
+                      <label htmlFor="name">Изменить проекта</label>
+                      <input
+                        required
+                        value={projectName}
+                        onChange={(e) => setProjectName(e.target.value)}
+                        type="text"
+                        name="name"
+                        className="modal__input"
+                        id="name"
+                        placeholder="Введите новое название"
+                        disabled={!portalVisible}
+                      />
+                    </div>
                   </div>
-                  <button type="submit" className="button button__edit">
-                    Изменить
-                  </button>
+                  <div className="modal__footer">
+                    <div className="modal__buttons">
+                      <button
+                        onClick={() => setPortalVisible(!portalVisible)}
+                        type="submit"
+                        className="button button_modal_close"
+                      >
+                        Отменить
+                      </button>
+                      <button type="submit" className="button button_modal button_modal-edit">
+                        Изменить
+                      </button>
+                    </div>
+                  </div>
                 </form>
               </div>
               <div
