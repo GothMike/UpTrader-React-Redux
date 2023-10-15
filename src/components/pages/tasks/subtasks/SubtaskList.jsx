@@ -4,6 +4,7 @@ import Spinner from "../../../spinner/Spinner";
 
 const SubtaskList = ({ subtask }) => {
   const taskLoadingStatus = useSelector((state) => state.tasks.taskLoadingStatus);
+  const task = useSelector((state) => state.tasks.task);
 
   switch (taskLoadingStatus) {
     case "loading":
@@ -18,7 +19,7 @@ const SubtaskList = ({ subtask }) => {
         <div className="subtask">
           <h4 className="subtask__header">Подзадачи</h4>
           {subtask.map((subtask) => (
-            <SubtaskItem key={subtask.id} subtask={subtask} />
+            <SubtaskItem key={subtask.id} task={task} subtask={subtask} />
           ))}
         </div>
       );

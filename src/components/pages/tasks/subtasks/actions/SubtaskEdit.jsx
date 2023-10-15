@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateTasks } from "../../../../../redux/actions/taskActions";
+import { subtaskUpdate } from "../../../../../redux/actions/subtasksActions";
+import { taskFetching } from "../../../../../redux/actions/taskActions";
 import { createPortal } from "react-dom";
 import Change from "../../../../../assets/Change.svg";
 
-const SubtaskEdit = ({ task }) => {
+const SubtaskEdit = ({ task, subtask }) => {
   const { subTasks } = task;
+  const { id } = subtask;
   const dispatch = useDispatch();
   const [subtaskDescription, setSubtaskDescription] = useState("");
   const [subtaskPriority, setSubtaskPriority] = useState(false);
   const [portalVisible, setPortalVisible] = useState(false);
-  console.log(task.subTasks);
-
   const modalActive = portalVisible ? "modal_active" : "";
   const overlayActive = portalVisible ? "modal__overlay_active" : "";
 
@@ -33,13 +33,25 @@ const SubtaskEdit = ({ task }) => {
     e.preventDefault();
 
     const updateSubtask = {
+      id: id,
+      taskId: task.id,
       description: subtaskDescription,
       priority: subtaskPriority,
       subTasks: [],
       comments: [],
     };
 
-    // dispatch(updateTasks(task.ProjectId, task.id, task));
+    task.subTasks = subTasks.map((subtask) => {
+      if (subtask.id === updateSubtask.id) {
+        return {
+          ...subtask,
+          ...updateSubtask,
+        };
+      }
+      return subtask;
+    });
+
+    dispatch(subtaskUpdate(task.ProjectId, task.id, task));
     setSubtaskPriority(false);
     setSubtaskDescription("");
     setPortalVisible(!portalVisible);

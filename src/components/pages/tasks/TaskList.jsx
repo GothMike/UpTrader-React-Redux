@@ -2,6 +2,7 @@ import { Droppable } from "react-beautiful-dnd";
 import TaskItem from "./TaskItem";
 import Spinner from "../../spinner/Spinner";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const TaskList = ({ title, tasks, id }) => {
   const taskLoadingStatus = useSelector((state) => state.tasks.tasksLoadingStatus);

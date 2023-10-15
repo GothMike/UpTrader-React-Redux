@@ -7,12 +7,14 @@ import { taskFetching } from "../../../redux/actions/taskActions";
 import SubtaskList from "./subtasks/SubtaskList";
 
 const TaskCard = ({ task }) => {
-  const { id, title, description, subTasks, priority, ProjectId, isQueue, isDevelopment, isDone } =
-    task;
+  const { id, title, description, ProjectId } = task;
   const taskEntity = useSelector((state) => state.tasks.task);
 
   const [portalVisible, setPortalVisible] = useState(false);
+  const overlayActive = portalVisible ? "modal__overlay_active" : "";
+
   const dispatch = useDispatch();
+  const taskLoadingStatus = useSelector((state) => state.tasks.taskLoadingStatus);
 
   useEffect(() => {
     dispatch(taskFetching(ProjectId, id));
@@ -39,12 +41,14 @@ const TaskCard = ({ task }) => {
                     <h3>Описание задачи:</h3>
                     <h4>{description}</h4>
                   </div>
-                  <SubtaskList subtask={subTasks} />
+                  <SubtaskList subtask={taskEntity.subTasks} />
                   <SubtaskCreate task={task} />
                 </div>
-
-                <div className="modal__footer modal__footer_task"></div>
               </div>
+              <div
+                onClick={() => setPortalVisible(!portalVisible)}
+                className={`modal__overlay ${overlayActive}`}
+              ></div>
             </>,
             document.body
           )}

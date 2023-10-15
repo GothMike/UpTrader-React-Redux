@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { subtaskCreated } from "../../../../../redux/actions/subtasksActions";
+import { subtaskCreate } from "../../../../../redux/actions/subtasksActions";
 import { createPortal } from "react-dom";
 import { v4 as uid } from "uuid";
+
 const SubtaskCreate = ({ task }) => {
   const dispatch = useDispatch();
   const [subtaskDescription, setSubtaskDescription] = useState("");
@@ -28,6 +29,7 @@ const SubtaskCreate = ({ task }) => {
 
   const onCreate = (e) => {
     e.preventDefault();
+
     const newSubtask = {
       id: uid(),
       taskId: task.id,
@@ -39,7 +41,7 @@ const SubtaskCreate = ({ task }) => {
 
     task.subTasks = [...task.subTasks, newSubtask];
 
-    dispatch(subtaskCreated(task.ProjectId, task.id, task));
+    dispatch(subtaskCreate(task.ProjectId, task.id, task));
     setSubtaskPriority(false);
     setSubtaskDescription("");
     setPortalVisible(!portalVisible);

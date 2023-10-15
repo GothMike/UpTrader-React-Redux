@@ -2,7 +2,6 @@ import { put, takeLatest, call, delay } from "redux-saga/effects";
 import axios from "axios";
 
 import {
-  taskFetching,
   taskFetched,
   taskFetchingError,
   tasksFetching,
@@ -39,16 +38,6 @@ export function* updatedTasksSaga({ projectId, taskId, newTask }) {
     yield put(taskUpdatedSuccess());
     yield delay(2000);
     yield put(disabledModalUpdateSuccess());
-  } catch (error) {
-    console.log(`Ошибка при редактировании ${error}`);
-  }
-}
-
-export function* createdSubtasksSaga({ projectId, taskId, newTask }) {
-  try {
-    yield axios.put(apiUrlTasks(projectId, taskId), newTask);
-    yield put(taskFetching(projectId, taskId));
-    yield;
   } catch (error) {
     console.log(`Ошибка при редактировании ${error}`);
   }
@@ -91,5 +80,4 @@ export function* watchTasksActions() {
   yield takeLatest("TASK_CREATED", createTaskSaga);
   yield takeLatest("TASK_DELETED", deleteTaskSaga);
   yield takeLatest("MOVE_TASK", moveTasks);
-  yield takeLatest("SUBTASK_CREATED", createdSubtasksSaga);
 }
