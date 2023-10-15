@@ -18,6 +18,8 @@ const SearchPanel = () => {
   }, [searchQuery, dispatch]);
 
   const onChange = (e) => {
+    e.preventDefault();
+
     setSearchQuery(e.target.value);
   };
   return (

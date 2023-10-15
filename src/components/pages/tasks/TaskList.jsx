@@ -2,10 +2,25 @@ import { Droppable } from "react-beautiful-dnd";
 import TaskItem from "./TaskItem";
 import Spinner from "../../spinner/Spinner";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const TaskList = ({ title, tasks, id }) => {
   const taskLoadingStatus = useSelector((state) => state.tasks.tasksLoadingStatus);
+  const searchQuery = useSelector((state) => state.tasks.dataEntry);
+
+  const renderFilterData = (arr) => {
+    const filteredData = arr.filter((item) => {
+      const titleMatches = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const taskIdMatches = String(item.id).includes(searchQuery);
+
+      return titleMatches || taskIdMatches;
+    });
+
+    return filteredData.map((task) => {
+      return <TaskItem key={task.id} task={task} index={task.taskNumber} />;
+    });
+  };
+
+  const filteredTasks = renderFilterData(tasks);
 
   switch (taskLoadingStatus) {
     case "loading":
@@ -33,9 +48,7 @@ const TaskList = ({ title, tasks, id }) => {
                   isDraggingOver={snapshot.isDraggingOver}
                   className="task__list"
                 >
-                  {tasks.map((task) => (
-                    <TaskItem key={task.id} task={task} index={task.taskNumber} />
-                  ))}
+                  {filteredTasks}
                   {provided.placeholder}
                 </div>
               )}

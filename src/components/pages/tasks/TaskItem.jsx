@@ -12,8 +12,10 @@ const TaskItem = ({ task }) => {
     <div className="task__card-priority task__card-priority_high"></div>
   );
 
+  console.log(task);
+
   return (
-    <Draggable draggableId={`${id}`} key={id} index={taskNumber}>
+    <Draggable draggableId={id} key={id} index={taskNumber}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -23,7 +25,7 @@ const TaskItem = ({ task }) => {
           className={cardView}
         >
           <div className="task__card-header">
-            <div className="task__card-number">{taskNumber}</div>
+            <div className="task__card-number">{id}</div>
             <div className="task__card-title">{title}</div>
           </div>
           <div className="task__card-wrapper">

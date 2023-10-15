@@ -39,20 +39,6 @@ const TaskPage = () => {
     const developmentTasks = arr.filter((task) => task.isDevelopment);
     const completedTasks = arr.filter((task) => task.isDone);
 
-    queueTasks.sort((a, b) => a.taskNumber - b.taskNumber);
-    queueTasks.forEach((task, index) => {
-      task.taskNumber = index + 1;
-    });
-    developmentTasks.sort((a, b) => a.taskNumber - b.taskNumber);
-    developmentTasks.forEach((task, index) => {
-      task.taskNumber = index + 1;
-    });
-
-    completedTasks.sort((a, b) => a.taskNumber - b.taskNumber);
-    completedTasks.forEach((task, index) => {
-      task.taskNumber = index + 1;
-    });
-
     setQueue(queueTasks);
     setDevelopment(developmentTasks);
     setCompleted(completedTasks);
