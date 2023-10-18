@@ -36,8 +36,6 @@
 @media (max-width: 500px) {
   .button {
     padding: 0.5rem 1rem;
-    color: #fff;
-    font-size: 0.4rem;
     &:after {
       background-color: var(--background-color-btn);
     }
@@ -51,7 +49,7 @@
       }
     }
     &__edit {
-      font-size: 0.4rem;
+      font-size: 0.5rem;
       background-color: darken(rgb(247, 227, 52), 15%);
       &:after {
         background-color: darken(rgb(247, 227, 52), 15%);
@@ -61,7 +59,7 @@
       }
     }
     &__delete {
-      font-size: 0.4rem;
+      font-size: 0.5rem;
       background-color: darken(rgb(224, 114, 114), 15%);
       &:after {
         background-color: darken(rgb(224, 114, 114), 15%);

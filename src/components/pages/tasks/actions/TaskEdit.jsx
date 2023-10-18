@@ -70,7 +70,7 @@ const TaskEdit = ({ task }) => {
         <>
           {createPortal(
             <>
-              <div className={`modal modal_task ${modalActive} `}>
+              <div className={`modal modal__task ${modalActive} `}>
                 <form onSubmit={(e) => onUpdate(e)} className={`modal__form `}>
                   <div className="modal__header">
                     <h2 className="modal__title">Редактирование задачи</h2>
@@ -84,7 +84,6 @@ const TaskEdit = ({ task }) => {
                       <label htmlFor="title">Название задачи:</label>
                       <input
                         required
-                        value={updTitle}
                         onChange={(e) => setUpdTitle(e.target.value)}
                         type="text"
                         name="title"
@@ -97,7 +96,6 @@ const TaskEdit = ({ task }) => {
                       <label htmlFor="descr">Описание задачи:</label>
                       <textarea
                         required
-                        value={updDescription}
                         onChange={(e) => setUpdDescription(e.target.value)}
                         type="textarea"
                         name="descr"

@@ -1,5 +1,6 @@
 const initialState = {
   tasks: [],
+  task: {},
   projectId: "",
   taskId: "",
   dataEntry: "",
@@ -93,6 +94,11 @@ const tasks = (state = initialState, action) => {
       return {
         ...state,
         dataEntry: action.payload,
+      };
+    case "CHOOSE_TASK":
+      return {
+        ...state,
+        task: action.payload,
       };
 
     default:

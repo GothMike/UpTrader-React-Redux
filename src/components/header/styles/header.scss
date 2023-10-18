@@ -27,4 +27,10 @@
     border-radius: 5px;
     padding: 10px;
   }
+  &__buttons {
+    display: flex;
+    button {
+      margin: 5px;
+    }
+  }
 }

@@ -16,6 +16,10 @@
       border-radius: 5px;
       padding: 10px;
     }
+    &__buttons {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 

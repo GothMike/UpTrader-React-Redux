@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { subtaskUpdate } from "../../../../../redux/actions/subtasksActions";
-import { taskFetching } from "../../../../../redux/actions/taskActions";
 import { createPortal } from "react-dom";
 import Change from "../../../../../assets/Change.svg";
 
@@ -9,9 +8,11 @@ const SubtaskEdit = ({ task, subtask }) => {
   const { subTasks } = task;
   const { id } = subtask;
   const dispatch = useDispatch();
+
   const [subtaskDescription, setSubtaskDescription] = useState("");
   const [subtaskPriority, setSubtaskPriority] = useState(false);
   const [portalVisible, setPortalVisible] = useState(false);
+
   const modalActive = portalVisible ? "modal_active" : "";
   const overlayActive = portalVisible ? "modal__overlay_active" : "";
 
@@ -63,15 +64,15 @@ const SubtaskEdit = ({ task, subtask }) => {
         <>
           {createPortal(
             <>
-              <div className={`modal modal_task ${modalActive}`}>
+              <div className={`modal modal__subtask ${modalActive}`}>
                 <form onSubmit={(e) => onEdit(e)} className={`modal__form `}>
                   <div className="modal__header">
-                    <h2 className="modal__title">Создание подзадачи</h2>
+                    <h2 className="modal__title">Редактирование подзадачи</h2>
                     <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
                       &times;
                     </div>
                   </div>
-                  <div className="modal__wrapper">
+                  <div className="modal__wrapper  modal__wrapper_project">
                     <div className="modal__item">
                       <label htmlFor="descr">Описание задачи:</label>
                       <textarea

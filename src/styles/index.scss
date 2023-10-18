@@ -13,17 +13,26 @@
 @import url(../components/header/styles/media.scss);
 
 @import url(../components/pages/projects/styles/projectList.scss);
-@import url(../components//pages/projects/styles/media.scss);
+@import url(../components/pages/projects/styles/media.scss);
 
 @import url(./others/button/button.scss);
 @import url(./others/button/media.scss);
 
-@import url(../components/pages/projects/actions/modals.scss);
+@import url(../components/pages/projects/actions/styles/modals.scss);
+@import url(../components/pages/projects/actions/styles/media.scss);
 
-@import url(../components/pages/tasks/styles/style.scss);
-@import url(../components/pages/tasks/styles/subtasks.scss);
+@import url(../components/pages/tasks/styles/task.scss);
+@import url(../components/pages/tasks/styles/media.scss);
+
+@import url(../components/pages/tasks/subtasks/styles/subtask.scss);
+@import url(../components/pages/tasks/subtasks/styles/media.scss);
 
 body {
   font-family: "Gochi Hand", cursive;
   background: url(../assets/bg--dots.png) top left #fff;
+}
+
+a {
+  text-decoration: none;
+  text-transform: none;
 }

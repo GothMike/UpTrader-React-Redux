@@ -6,6 +6,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { tasksFetching, moveTasks } from "../../../redux/actions/taskActions";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const TaskPage = () => {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -100,21 +101,28 @@ const TaskPage = () => {
   };
 
   return (
-    <Container>
-      <Header />
-      <section className="task">
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="task__title">Задачи</div>
-          <div className="task__boards">
-            <TaskList title={"Очередь"} tasks={queue} id={"1"} />
-            <TaskList title={"В работе"} tasks={development} id={"2"} />
-            <TaskList title={"Выполнено"} tasks={completed} id={"3"} />
-          </div>
-        </DragDropContext>
-      </section>
-      {successModal}
-      {modalUpdate}
-    </Container>
+    <>
+      <Helmet>
+        <title>Задачи</title>
+        <meta name="description" content="Страница с задачами" />
+        <link rel="icon" href="./logoToDo.webp" />
+      </Helmet>
+      <Container>
+        <Header />
+        <section className="task">
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <div className="task__title">Задачи</div>
+            <div className="task__boards">
+              <TaskList title={"Очередь"} tasks={queue} id={"1"} />
+              <TaskList title={"В работе"} tasks={development} id={"2"} />
+              <TaskList title={"Выполнено"} tasks={completed} id={"3"} />
+            </div>
+          </DragDropContext>
+        </section>
+        {successModal}
+        {modalUpdate}
+      </Container>
+    </>
   );
 };
 

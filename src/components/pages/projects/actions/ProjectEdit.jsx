@@ -57,7 +57,7 @@ const ProjectEdit = ({ id }) => {
                       &times;
                     </div>
                   </div>
-                  <div className="modal__wrapper">
+                  <div className="modal__wrapper modal__wrapper_project">
                     <div className="modal__item">
                       <label htmlFor="name">Изменить проекта</label>
                       <input

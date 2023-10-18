@@ -1,0 +1,10 @@
+@media (max-width: 500px) {
+  .subtask {
+    &__wrapper {
+      width: 200px;
+    }
+    &__create {
+      margin-bottom: 15px;
+    }
+  }
+}

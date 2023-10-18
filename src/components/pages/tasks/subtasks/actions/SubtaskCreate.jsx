@@ -8,14 +8,14 @@ const SubtaskCreate = ({ task }) => {
   const dispatch = useDispatch();
   const [subtaskDescription, setSubtaskDescription] = useState("");
   const [subtaskPriority, setSubtaskPriority] = useState(false);
-  const [portalVisible, setPortalVisible] = useState(false);
+  const [subtaskPortalVisible, setSubtaskPortalVisible] = useState(false);
 
-  const modalActive = portalVisible ? "modal_active" : "";
-  const overlayActive = portalVisible ? "modal__overlay_active" : "";
+  const modalActive = subtaskPortalVisible ? "modal_active" : "";
+  const overlayActive = subtaskPortalVisible ? "modal__overlay_active" : "";
 
   const handleEscKey = (event) => {
-    if (event.key === "Escape" && portalVisible) {
-      setPortalVisible(!portalVisible);
+    if (event.key === "Escape" && subtaskPortalVisible) {
+      setSubtaskPortalVisible(!subtaskPortalVisible);
     }
   };
 
@@ -35,6 +35,7 @@ const SubtaskCreate = ({ task }) => {
       taskId: task.id,
       description: subtaskDescription,
       priority: subtaskPriority,
+      isCompleted: false,
       subTasks: [],
       comments: [],
     };
@@ -44,24 +45,27 @@ const SubtaskCreate = ({ task }) => {
     dispatch(subtaskCreate(task.ProjectId, task.id, task));
     setSubtaskPriority(false);
     setSubtaskDescription("");
-    setPortalVisible(!portalVisible);
+    setSubtaskPortalVisible(!subtaskPortalVisible);
   };
 
   const renderPortal = () => {
-    if (portalVisible) {
+    if (subtaskPortalVisible) {
       return (
         <>
           {createPortal(
             <>
-              <div className={`modal modal_task ${modalActive}`}>
+              <div className={`modal modal__subtask ${modalActive}`}>
                 <form onSubmit={(e) => onCreate(e)} className={`modal__form `}>
                   <div className="modal__header">
                     <h2 className="modal__title">Создание подзадачи</h2>
-                    <div onClick={() => setPortalVisible(!portalVisible)} className="modal__close">
+                    <div
+                      onClick={() => setSubtaskPortalVisible(!subtaskPortalVisible)}
+                      className="modal__close"
+                    >
                       &times;
                     </div>
                   </div>
-                  <div className="modal__wrapper">
+                  <div className="modal__wrapper modal__wrapper_project">
                     <div className="modal__item">
                       <label htmlFor="descr">Описание задачи:</label>
                       <textarea
@@ -91,7 +95,7 @@ const SubtaskCreate = ({ task }) => {
                     </div>
                     <div className="modal__buttons">
                       <button
-                        onClick={() => setPortalVisible(!portalVisible)}
+                        onClick={() => setSubtaskPortalVisible(!subtaskPortalVisible)}
                         type="submit"
                         className="button button_modal_close"
                       >
@@ -105,7 +109,7 @@ const SubtaskCreate = ({ task }) => {
                 </form>
               </div>
               <div
-                onClick={() => setPortalVisible(!portalVisible)}
+                onClick={() => setSubtaskPortalVisible(!subtaskPortalVisible)}
                 className={`modal__overlay ${overlayActive}`}
               ></div>
             </>,
@@ -120,7 +124,10 @@ const SubtaskCreate = ({ task }) => {
 
   return (
     <>
-      <div onClick={() => setPortalVisible(!portalVisible)} className="subtask__create">
+      <div
+        onClick={() => setSubtaskPortalVisible(!subtaskPortalVisible)}
+        className="subtask__create"
+      >
         Добавить подзадачу
       </div>
 

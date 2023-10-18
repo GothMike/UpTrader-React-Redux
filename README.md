@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+<h1>Описание проекта</h1>
+UpTrader - Это веб-приложение предназначено для управления проектами, задачами и подзадачами. Вы можете создавать, перемещать, редактировать и удалять задачи, а также создавать подзадачи для каждой задачи.
+<br/>
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ссылка для тестирования - <a href='http://uptrader.gothmike.net/'>*клик*</a>
+<h2>Основные функции</h2>
+<h3>
+ На странице "Проекты" вы сможете:
+</h3>
+<ul>
+ <li>Просматривать список проектов</li>
+ <li>Создавать новые проекты</li>
+ <li>Удалять существующие проекты</li>
+ <li>Страница "Задачи"</li>
+</ul>
 
-## Available Scripts
+<h3> На странице "Задачи" вы сможете:</h3>
+<ul>
+<li>Просматривать список задач внутри выбранного проекта</li>
+<li>Создавать новые задачи в выбранном проекте</li>
+<li>Удалять существующие задачи</li>
+<li>Управлять подзадачами для каждой задачи</li>
+<li>Перемещение задач</li>
+ <li>Вы можете перемещать задачи между тремя столбцами: "Ожидание", "В работе" и "Готово"</li>
+</ul>
 
-In the project directory, you can run:
+<h3>Подзадачи</h3> 
+Для каждой задачи вы можете создавать подзадачи, которые помогают более детально разбить задачу на части. Вы можете добавить, редактировать и удалять подзадачи.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h2>Технологии</h2>
+<h3>Проект разработан с использованием следующих технологий и инструментов:</h3>
+<ul>
+<li>React: Основная библиотека для разработки пользовательского интерфейса</li>
+<li>React Router: Для навигации между страницами и управления маршрутами</li>
+<li>React Redux: Для управления состоянием приложения и управления данными</li>
+<li>Redux Saga: Для обработки побочных эффектов и асинхронных операций</li>
+<li>React Beautiful DND: Для поддержки перетаскивания задач и изменения их порядка</li>
+<li>React Helmet: Для управления метатегами и заголовком страницы</li>
+<li>axios: Для выполнения HTTP-запросов к серверу</li>
+<li>Date-fns: Библиотека для работы с датами и временем</li>
+<li>Sass: Для стилизации компонентов и создания красочного интерфейса</li>
+<li>UUID: Для создания уникальных идентификаторов объектоd</li>
+<li>PropTypes: Для проверки типов свойств (prop types) компонентов</li>
+</ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h2>Авторы</h2>
+Проект разработан разработчиком Михаилом Ворониным(@gothmike)
 
-### `npm test`
+<h2>Связь с мной</h2>
+Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с мной по адресу mikhailvoronin97@gmail.com или создайте issue в репозиторий
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
